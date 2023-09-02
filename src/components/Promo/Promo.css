@@ -1,0 +1,13 @@
+.promo {
+  max-width: 100%;
+  background-color: #465DFF;
+}
+
+.promo__text {
+  font-family: "Inter", Arial, sans-serif;
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+}

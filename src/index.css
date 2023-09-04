@@ -1,7 +1,9 @@
 @import url("./vendor/normalize.css");
 @import url("./vendor/fonts.css");
+@import url("./components/App/App.css");
 @import url("./components/Link/link.css");
 @import url("../src/components/Main/Main.css");
 @import url("../src/components/Header/Header.css");
 @import url("../src/components/Promo/Promo.css");
+@import url("./components/NavTab/NavTab.css");
 @import url("../src/components/Footer/Footer.css");

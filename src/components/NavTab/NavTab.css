@@ -28,9 +28,9 @@
 }
 
 @media screen and (max-width: 350px) {
-    .nav-tab__anchors {
-      gap: 24px;
-    }
+  .nav-tab__anchors {
+    gap: 24px;
+  }
 
   .nav-tab__anchor {
     font-size: 11px;

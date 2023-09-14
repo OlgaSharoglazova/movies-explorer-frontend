@@ -26,6 +26,7 @@
 
 .techs__content {
   border-top: 1px solid #000;
+  width: 1140px;
   margin-top: 23px;
   padding-top: 90px;
   padding-bottom: 100px;
@@ -59,6 +60,7 @@
   display: grid;
   grid-template-columns: repeat(7, 90px);
   gap: 10px;
+  justify-content: center;
   text-align: center;
   color: #000;
   font-family: "Inter", Arial, sans-serif;
@@ -71,7 +73,7 @@
 }
 
 .techs__item {
-  background-color: #E8E8E8;
+  background-color: #e8e8e8;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -92,6 +94,7 @@
   .techs__content {
     padding-bottom: 83px;
     gap: 22px;
+    width: 668px;
   }
 
   .techs__list {
@@ -123,6 +126,7 @@
     margin-top: 28px;
     padding-top: 60px;
     padding-bottom: 50px;
+    max-width: 284px;
   }
 
   .techs__subtitle {

@@ -5,10 +5,13 @@ import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function Main({ props }) {
-  
-    return (
+  return (
+    <>
+      <Header></Header>
       <main className="main">
         <Promo></Promo>
         <NavTab></NavTab>
@@ -17,8 +20,9 @@ function Main({ props }) {
         <AboutMe></AboutMe>
         <Portfolio></Portfolio>
       </main>
-    );
-  }
-  
-  export default Main;
-  
+      <Footer></Footer>
+    </>
+  );
+}
+
+export default Main;

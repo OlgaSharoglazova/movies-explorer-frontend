@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../Footer/Footer";
 import Promo from "../Promo/Promo";
 import NavTab from "../NavTab/NavTab";
 import AboutProject from "../AboutProject/AboutProject";
@@ -17,7 +16,6 @@ function Main({ props }) {
         <Techs></Techs>
         <AboutMe></AboutMe>
         <Portfolio></Portfolio>
-        <Footer></Footer>
       </main>
     );
   }

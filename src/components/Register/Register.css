@@ -1,0 +1,137 @@
+.register {
+  width: 100%;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.register__container {
+  width: 396px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 70px 0;
+}
+
+.register__logo-link {
+  text-decoration: none;
+}
+
+.register__logo {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 40px;
+}
+
+.register__title {
+  color: #000;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29px;
+  margin-bottom: 30px;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register__label {
+  color: #a0a0a0;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  margin-top: 10px;
+}
+
+.register__input {
+  margin-top: 10px;
+  width: 100%;
+  height: 46px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #000;
+  border: none;
+  padding: 0 0 0 15px;
+}
+
+.register__input_error {
+  color: #ee3465;
+}
+
+.register__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12;
+  color: #ee3465;
+  margin-top: 10px;
+}
+
+.register__button {
+  width: 100%;
+  height: 45px;
+  margin: 69px 0 16px 0;
+  border-radius: 3px;
+  background-color: #ff6838;
+  border: none;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  cursor: pointer;
+}
+
+.register__button:hover {
+  opacity: 0.8;
+}
+
+.register__button_disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.register__text {
+  text-align: center;
+  color: #8b8b8b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  margin: 0;
+  padding: 0;
+}
+
+.register__link {
+  color: #ff6838;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 1150px) {
+    .register__container {
+        padding-top: 232px;
+      }
+}
+
+@media screen and (max-width: 720px) {
+    .register__container {
+        width: 260px;
+        align-items: center;
+      }
+
+      .register__logo {
+        margin-bottom: 50px;
+      }
+
+      .register__title {
+        margin-bottom: 80px;
+      }
+
+      .register__button {
+        margin-top: 157px;
+        margin-bottom: 14px;
+      }
+}

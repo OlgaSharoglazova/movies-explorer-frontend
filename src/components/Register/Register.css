@@ -134,4 +134,9 @@
         margin-top: 157px;
         margin-bottom: 14px;
       }
+
+      .login__text {
+        font-size: 12px;
+        line-height: 15px;
+      }
 }

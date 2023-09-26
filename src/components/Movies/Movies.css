@@ -1,0 +1,11 @@
+.movies {
+  width: 100%;
+  background-color: #FFF;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.movies__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

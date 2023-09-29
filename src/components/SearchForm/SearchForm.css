@@ -44,3 +44,21 @@
 .searchform__button:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 1150px) {
+    .searchform {
+        width: 708px;
+        padding-top: 80px;
+        padding-bottom: 50px;
+      }
+    }
+
+    @media screen and (max-width: 760px) {
+        .searchform {
+            width: 292px;
+          }
+
+          .searchform__input {
+            font-size: 11px;
+          }
+    }

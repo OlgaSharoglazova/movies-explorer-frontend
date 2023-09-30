@@ -15,7 +15,7 @@ function MoviesCard() {
             <h3 className="movies-card__title">33 слова о дизайне</h3>
             <p className="movies-card__duration">1ч42м</p>
           </div>
-          <input type="radio" className="movies-card__save"></input>
+          <button type="button" className="movies-card__del"></button>
         </div>
       </div>
     </li>

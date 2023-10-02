@@ -1,4 +1,6 @@
+import "./NotFound.css";
 import { Link } from "react-router-dom";
+
 function NotFound() {
   return (
     <main className="not-found">

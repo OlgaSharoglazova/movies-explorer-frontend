@@ -1,3 +1,4 @@
+import "./App.css";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";

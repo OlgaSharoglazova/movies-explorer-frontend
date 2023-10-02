@@ -60,7 +60,7 @@
   margin-right: 12px;
 }
 
-.movies-card__save-active {
+.movies-card__save:focus {
   box-sizing: border-box;
   width: 16px;
   height: 16px;

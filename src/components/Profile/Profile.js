@@ -23,6 +23,7 @@ function Profile() {
               />
               <span className="profile__error"></span>
             </div>
+            <div className="profile__line"></div>
             <div className="profile__input-container">
               <label className="profile__label">E-mail</label>
               <input
@@ -45,7 +46,9 @@ function Profile() {
                 </button>
               </div>
               <button className="profile__edit button">Редактировать</button>
-              <button className="profile__sign-out button">Выйти из аккаунта</button>
+              <button className="profile__sign-out button">
+                Выйти из аккаунта
+              </button>
             </div>
           </form>
         </section>

@@ -1,5 +1,114 @@
 .header {
-  max-width: 100%;
-  background-color: #465DFF;
+  width: 100%;
+  background-color: #fff;
   height: 74px;
+}
+
+.header__main {
+  background-color: #465dff;
+}
+
+.header__container {
+  display: flex;
+  padding: 18px 70px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.header__menu {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.header__signup {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__signin {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+  border-radius: 3px;
+  background-color: #2be080;
+  padding: 8px 20px;
+  box-sizing: border-box;
+}
+
+.header__main-profile {
+  color: #000;
+  background-color: #fff;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 364px;
+  align-items: center;
+}
+
+.header__movie-links {
+  display: flex;
+  gap: 16px;
+}
+
+.header__main-link {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__link-movies {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+}
+
+.header__link-saved {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #000;
+}
+
+.header__profile {
+  color: #000;
+  background-color: #f9f9f9;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
 }

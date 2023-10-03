@@ -1,10 +1,11 @@
 import "./Header.css";
+import Navigation from "../Navigation/Navigation";
 import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 
 function Header({ onBurgerClick }) {
   const location = useLocation();
-  const isAuthorized = false;
+  const isAuthorized = true;
 
   if (location.pathname === "/") {
     return (
@@ -14,19 +15,22 @@ function Header({ onBurgerClick }) {
             <img className="header__logo" alt="Логотип" src={logo} />
           </Link>
           {isAuthorized ? (
+            <>
             <div className="header__nav">
-            <div className="header__movie-links">
-              <Link className="link header__main-link" to={"/movies"}>
-                Фильмы
-              </Link>
-              <Link className="link header__main-link" to={"/saved-movies"}>
-                Сохранённые фильмы
+              <div className="header__movie-links">
+                <Link className="link header__main-link" to={"/movies"}>
+                  Фильмы
+                </Link>
+                <Link className="link header__main-link" to={"/saved-movies"}>
+                  Сохранённые фильмы
+                </Link>
+              </div>
+              <Link className="link header__main-profile" to={"/profile"}>
+                Аккаунт
               </Link>
             </div>
-            <Link className="link header__main-profile" to={"/profile"}>
-              Аккаунт
-            </Link>
-          </div>
+            <Navigation onBurgerClick={onBurgerClick} />
+            </>
           ) : (
             <div className="header__menu">
               <Link className="header__signup link" to={"/signup"}>
@@ -60,6 +64,7 @@ function Header({ onBurgerClick }) {
               Аккаунт
             </Link>
           </div>
+          <Navigation onBurgerClick={onBurgerClick} />
         </div>
       </header>
     );

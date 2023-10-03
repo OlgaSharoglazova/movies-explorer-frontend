@@ -4,10 +4,10 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
-function Movies() {
+function Movies({ onBurgerClick }) {
   return (
     <>
-      <Header></Header>
+      <Header onBurgerClick={onBurgerClick}></Header>
       <main className="movies">
         <section className="movies__container">
           <SearchForm></SearchForm>

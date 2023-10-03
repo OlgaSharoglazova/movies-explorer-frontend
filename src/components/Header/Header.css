@@ -64,7 +64,7 @@
 .header__nav {
   display: flex;
   justify-content: space-between;
-  gap: 364px;
+  width: 60%;
   align-items: center;
 }
 
@@ -113,7 +113,7 @@
   border-radius: 20px;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1150px) {
   .header__nav {
     display: none;
   }

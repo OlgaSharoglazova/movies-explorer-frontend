@@ -1,14 +1,13 @@
 import "./Navigation.css";
 import { Link, useLocation } from "react-router-dom";
 
-function Navigation() {
+function Navigation({ isOpen, onClose }) {
   const location = useLocation();
-  const isBurgerMenuOpen = false;
-
+  
   return (
-    <div className={ isBurgerMenuOpen ? "navigation" : "navigation_hidden" }>
+    <div className={ isOpen ? "navigation_opened" : "navigation" }>
       <div className="navigation__container">
-        <button className="navigation__close"></button>
+        <button onClick={onClose} className="navigation__close" aria-label="Закрыть"></button>
         <div className="navigation__menu">
           <Link
             to="/"
@@ -34,8 +33,8 @@ function Navigation() {
             to="/saved-movies"
             className={
               location.pathname === "/saved-movies"
-                ? "navigation__link_active"
-                : "navigation__link"
+                ? "navigation__link_active link"
+                : "navigation__link link"
             }
           >
             Сохранённые фильмы

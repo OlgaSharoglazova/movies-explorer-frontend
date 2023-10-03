@@ -9,10 +9,10 @@ import Portfolio from "../Portfolio/Portfolio";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-function Main({ props }) {
+function Main({ onBurgerClick }) {
   return (
     <>
-      <Header></Header>
+      <Header onBurgerClick={onBurgerClick} ></Header>
       <main className="main">
         <Promo></Promo>
         <NavTab></NavTab>

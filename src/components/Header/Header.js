@@ -1,9 +1,10 @@
 import "./Header.css";
-import Navigation from "../Navigation/Navigation";
 import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import Navigation from "../Navigation/Navigation";
 
-function Header({ onBurgerClick }) {
+function Header() {
   const location = useLocation();
   const isAuthorized = true;
 
@@ -29,7 +30,8 @@ function Header({ onBurgerClick }) {
                 Аккаунт
               </Link>
             </div>
-            <Navigation onBurgerClick={onBurgerClick} />
+            <BurgerMenu />
+            <Navigation />
             </>
           ) : (
             <div className="header__menu">
@@ -64,7 +66,8 @@ function Header({ onBurgerClick }) {
               Аккаунт
             </Link>
           </div>
-          <Navigation onBurgerClick={onBurgerClick} />
+          <BurgerMenu />
+          <Navigation />
         </div>
       </header>
     );

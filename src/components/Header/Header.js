@@ -3,16 +3,16 @@ import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
-function Header({ onBurgerClick, isOpen, onClose }) {
+function Header({ onBurgerClick }) {
   const location = useLocation();
   const isAuthorized = true;
 
   if (location.pathname === "/") {
     return (
-      <header className="header header__main">
+      <header className="header header-main">
         <div className="header__container">
           <Link to={"/"} className="header__logo link">
-            <img className="header__logo" alt="Логотип" src={logo} />
+            <img className="header__logo-icon" alt="Логотип" src={logo} />
           </Link>
           {isAuthorized ? (
             <>
@@ -48,8 +48,8 @@ function Header({ onBurgerClick, isOpen, onClose }) {
     return (
       <header className="header">
         <div className="header__container">
-          <Link to={"/"} className="header__logo-link link">
-            <img className="header__logo" alt="Логотип" src={logo} />
+          <Link to={"/"} className="header__logo link">
+            <img className="header__logo-icon" alt="Логотип" src={logo} />
           </Link>
           <div className="header__nav">
             <div className="header__movie-links">

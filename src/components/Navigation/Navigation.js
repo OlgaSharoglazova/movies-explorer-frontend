@@ -5,7 +5,7 @@ function Navigation({ isOpen, onClose }) {
   const location = useLocation();
   
   return (
-    <div className={ isOpen ? "navigation_opened" : "navigation" }>
+    <div className={ isOpen ? "navigation navigation-opened" : "navigation" }>
       <div className="navigation__container">
         <button onClick={onClose} className="navigation__close" aria-label="Закрыть"></button>
         <div className="navigation__menu">
@@ -13,7 +13,7 @@ function Navigation({ isOpen, onClose }) {
             to="/"
             className={
               location.pathname === "/"
-                ? "navigation__link_active link"
+                ? "navigation__link navigation__link_active link"
                 : "navigation__link link"
             }
           >
@@ -23,7 +23,7 @@ function Navigation({ isOpen, onClose }) {
             to="/movies"
             className={
               location.pathname === "/movies"
-                ? "navigation__link_active link"
+                ? "navigation__link navigation__link_active link"
                 : "navigation__link link"
             }
           >
@@ -33,7 +33,7 @@ function Navigation({ isOpen, onClose }) {
             to="/saved-movies"
             className={
               location.pathname === "/saved-movies"
-                ? "navigation__link_active link"
+                ? "navigation__link navigation__link_active link"
                 : "navigation__link link"
             }
           >

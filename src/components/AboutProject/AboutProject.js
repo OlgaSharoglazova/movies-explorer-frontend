@@ -26,10 +26,10 @@ function AboutProject() {
           </div>
         </div>
         <div className="about-project__visual">
-          <div className="about-project__visual-cell_first">
-            <p className="about-project__visual-title">1 неделя</p>
+          <div className="about-project__visual-cell about-project__visual-cell_first">
+            <p className="about-project__visual-title about-project__visual-title">1 неделя</p>
           </div>
-          <div className="about-project__visual-cell_second">
+          <div className="about-project__visual-cell about-project__visual-cell_second">
             <p className="about-project__visual-title">4 недели</p>
           </div>
           <p className="about-project__visual-text">Back-end</p>

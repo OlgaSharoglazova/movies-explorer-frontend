@@ -1,10 +1,9 @@
 .about-project {
   background-color: #fff;
-  width: 100%;
+  max-width: 1140px;
   display: flex;
   justify-content: center;
-  padding-top: 110px;
-  padding-bottom: 110px;
+  padding: 110px 70px;
 }
 
 .about-project__container {
@@ -87,10 +86,12 @@
   justify-self: center;
 }
 
-@media screen and (max-width: 1160px) {
+@media screen and (max-width: 1000px) {
   .about-project {
     padding-top: 90px;
     padding-bottom: 90px;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 
   .about-project__container {
@@ -107,10 +108,12 @@
   }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 600px) {
   .about-project {
     padding-top: 70px;
     padding-bottom: 69px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .about-project__container {

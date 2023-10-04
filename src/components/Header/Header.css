@@ -13,6 +13,7 @@
   padding: 18px 70px;
   align-items: center;
   justify-content: space-between;
+  max-width: 1150px;
 }
 
 .header__logo {

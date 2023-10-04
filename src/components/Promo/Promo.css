@@ -1,6 +1,6 @@
 .promo {
   max-width: 100%;
-  background-color: #465DFF;
+  background-color: #465dff;
   background-image: url(../../images/landing-logo.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -11,7 +11,7 @@
 
 .promo__text {
   font-family: "Inter", Arial, sans-serif;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
@@ -19,16 +19,18 @@
   text-align: center;
   margin: 0 auto 0;
   max-width: 730px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 850px) {
   .promo {
     padding-top: 326px;
     padding-bottom: 342px;
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .promo {
     background-size: 248px;
     padding-top: 326px;

@@ -1,0 +1,14 @@
+.movies {
+  width: 100%;
+  background-color: #FFF;
+  font-family: "Inter", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.movies__container {
+  max-width: 1140px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

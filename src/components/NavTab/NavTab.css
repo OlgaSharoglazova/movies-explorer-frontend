@@ -1,0 +1,38 @@
+.nav-tab {
+  width: 100%;
+  background-color: #F5F5F5;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-tab__anchors {
+  list-style: none;
+  display: flex;
+  margin: 0 auto;
+  padding: 24px 0;
+  gap: 40px;
+}
+
+.nav-tab__anchor {
+  color: #000;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+@media screen and (max-width: 800px) {
+  .nav-tab__anchors {
+    padding: 25px 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .nav-tab__anchors {
+    gap: 24px;
+  }
+
+  .nav-tab__anchor {
+    font-size: 11px;
+  }
+}

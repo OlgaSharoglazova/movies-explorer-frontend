@@ -1,0 +1,115 @@
+.movies-card {
+  list-style: none;
+  max-width: 270px;
+  background-color: #fdfdfd;
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.movies-card__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.movies-card__image {
+  height: 151px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.movies-card__description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.movies-card__info {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 12px;
+}
+
+.movies-card__title {
+  color: #000;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0 0 10px 0;
+}
+
+.movies-card__duration {
+  color: #a0a0a0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  margin: 0;
+}
+
+.movies-card__save {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background-color: #f9f9f9;
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 0;
+  margin-top: 14px;
+  margin-right: 12px;
+}
+
+.movies-card__save:focus {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background-color: #2be080;
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 0;
+  margin-top: 14px;
+  margin-right: 12px;
+}
+
+.movies-card__del {
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  background-image: url(../../images/card-button-del.svg);
+  cursor: pointer;
+  padding: 0;
+  margin-top: 14px;
+  margin-right: 12px;
+}
+
+.movies-card__save:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 620px) {
+  .movies-card {
+    max-width: 339px;
+  }
+
+  .movies-card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .movies-card {
+    max-width: 300px;
+  }
+
+  .movies-card__image {
+    height: 168px;
+  }
+}

@@ -4,13 +4,13 @@ const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(res.status);
 };
 
-export const register = (email, password) => {
+export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ name, email, password }),
   }).then(checkResponse);
 };
 

@@ -57,8 +57,6 @@ function Register({ handleRegister }) {
             name="password"
             placeholder="Пароль"
             required
-            minLength="6"
-            maxLength="20"
             value={values.password}
             onChange={handleChange}
           />

@@ -2,21 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import "./Login.css";
+import { useFormWithValidation } from "../../utils/UseValidation";
+
 
 function Login({ handleLogin }) {
 
-  const [formValue, setFormValue] = React.useState({ email: "", password: "" });
-
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setFormValue({ ...formValue, [name]: value });
-  };
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (evt) => {
-    const { email, password } = formValue;
+
     evt.preventDefault();
 
-    handleLogin(email, password);
+    handleLogin({ email: values.email, password: values.password });
   };
 
   return (
@@ -32,17 +29,17 @@ function Login({ handleLogin }) {
           <input
             className="login__input"
             id="email"
-            type="email"
+            type="text"
             name="email"
             minLength={8}
             maxLength={40}
             placeholder="E-mail"
             required
-            value={formValue.email}
+            value={values.email}
             onChange={handleChange}
-            autoComplete="email"
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
           />
-          <span className="login__error"></span>
+          <span className="login__error">{errors.email || ""}</span>
           <label className="login__label">Пароль</label>
           <input
             className="login__input"
@@ -51,14 +48,11 @@ function Login({ handleLogin }) {
             name="password"
             placeholder="Пароль"
             required
-            minLength={6}
-            maxLength={20}
-            value={formValue.password}
+            value={values.password}
             onChange={handleChange}
-            autoComplete="current-password"
           />
-          <span className="login__error"></span>
-          <button type="submit" className="login__button">
+          <span className="login__error">{errors.password || ""}</span>
+          <button type="submit" disabled={!isValid} className="login__button">
           Войти
           </button>
         </form>

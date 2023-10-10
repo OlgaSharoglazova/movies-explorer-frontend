@@ -11,6 +11,7 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import * as auth from "../../utils/AuthApi";
 import { mainApi } from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const [isMenuOpened, setIsMenuOpened] = React.useState(false);
@@ -93,6 +94,7 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Routes>
         <Route
@@ -140,6 +142,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 

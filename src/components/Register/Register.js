@@ -2,25 +2,16 @@ import React from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { useFormWithValidation } from "../../utils/UseValidation";
 
 function Register({ handleRegister }) {
-  const [formValue, setFormValue] = React.useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setFormValue({ ...formValue, [name]: value });
-  };
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (evt) => {
-    const { name, email, password } = formValue;
 
     evt.preventDefault();
 
-    handleRegister(name, email, password);
+    handleRegister({ name: values.name, email: values.email, password: values.password });
   };
 
   return (
@@ -39,26 +30,25 @@ function Register({ handleRegister }) {
             name="name"
             placeholder="Имя"
             required
-            minLength={2}
-            maxLength={30}
-            value={formValue.name}
+            minLength="2"
+            maxLength="30"
+            value={values.name}
             onChange={handleChange}
-            autoComplete="name"
           />
-          <span className="register__error"></span>
+          <span className="register__error">{errors.name || ""}</span>
           <label className="register__label">E-mail</label>
           <input
             className="register__input"
             id="email"
-            type="email"
+            type="text"
             name="email"
             placeholder="E-mail"
             required
-            value={formValue.email}
+            value={values.email}
             onChange={handleChange}
-            autoComplete="email"
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
           />
-          <span className="register__error"></span>
+          <span className="register__error">{errors.email || ""}</span>
           <label className="register__label">Пароль</label>
           <input
             className="register__input"
@@ -67,14 +57,13 @@ function Register({ handleRegister }) {
             name="password"
             placeholder="Пароль"
             required
-            minLength={6}
-            maxLength={20}
-            value={formValue.password}
+            minLength="6"
+            maxLength="20"
+            value={values.password}
             onChange={handleChange}
-            autoComplete="new-password"
           />
-          <span className="register__error"></span>
-          <button type="submit" className="register__button">
+          <span className="register__error">{errors.password || ""}</span>
+          <button type="submit" disabled={!isValid} className="register__button">
             Зарегистрироваться
           </button>
         </form>

@@ -1,13 +1,18 @@
+import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Profile() {
+
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <>
       <Header></Header>
       <main className="profile">
         <section className="profile__container">
-          <h1 className="profile__title">Привет, Виталий!</h1>
+          <h1 className="profile__title">Привет, {currentUser.name}!</h1>
           <form className="profile__form">
             <div className="profile__input-container">
               <label className="profile__label">Имя</label>

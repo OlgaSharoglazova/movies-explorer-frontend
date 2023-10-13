@@ -8,10 +8,8 @@ function Register({ handleRegister }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (evt) => {
-
     evt.preventDefault();
-
-    handleRegister({ name: values.name, email: values.email, password: values.password });
+    handleRegister(values.name, values.email, values.password);
   };
 
   return (
@@ -32,7 +30,7 @@ function Register({ handleRegister }) {
             required
             minLength="2"
             maxLength="30"
-            value={values.name}
+            value={values.name || ""}
             onChange={handleChange}
           />
           <span className="register__error">{errors.name || ""}</span>
@@ -44,7 +42,7 @@ function Register({ handleRegister }) {
             name="email"
             placeholder="E-mail"
             required
-            value={values.email}
+            value={values.email || ""}
             onChange={handleChange}
             pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
           />
@@ -57,11 +55,15 @@ function Register({ handleRegister }) {
             name="password"
             placeholder="Пароль"
             required
-            value={values.password}
+            value={values.password || ""}
             onChange={handleChange}
           />
           <span className="register__error">{errors.password || ""}</span>
-          <button type="submit" disabled={!isValid} className="register__button">
+          <button
+            type="submit"
+            disabled={!isValid}
+            className="register__button"
+          >
             Зарегистрироваться
           </button>
         </form>

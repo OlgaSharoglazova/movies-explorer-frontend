@@ -11,7 +11,9 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import * as auth from "../../utils/AuthApi";
 import { mainApi } from "../../utils/MainApi";
+import { moviesApi } from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [isMenuOpened, setIsMenuOpened] = React.useState(false);
@@ -23,6 +25,8 @@ function App() {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // проверка токена
 
   const checkToken = () => {
     const token = localStorage.getItem("jwt");
@@ -47,20 +51,6 @@ function App() {
     //eslint-disable-next-line
   }, []);
 
-  React.useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      Promise.all([mainApi.getProfile(), mainApi.getSavedMovies()])
-        .then(([userdata, moviesdata]) => {
-          setСurrentUser(userdata);
-          setMovies(moviesdata);
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    }
-  }, [isLoggedIn]);
-
   function handleBurgerClick() {
     setIsMenuOpened(true);
   }
@@ -69,18 +59,22 @@ function App() {
     setIsMenuOpened(false);
   }
 
+  // регистрация
+
   function handleRegister(name, email, password) {
     auth
       .register(name, email, password)
       .then(() => {
         setIsSuccess(true);
-        navigate("/movies");
+        handleLogin(email, password);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
         setIsSuccess(false);
       });
   }
+
+  // авторизация
 
   function handleLogin(email, password) {
     auth
@@ -93,55 +87,72 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
+  //получение всех фильмов
+
+  React.useEffect(() => {
+    moviesApi.getMovies()
+    .then(() => {
+      setMovies(movies);
+      localStorage.setItem("allMovies", JSON.stringify(movies));
+    })
+    .catch((err) => console.log(`Ошибка: ${err}`));
+  })
+
+  
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className="page">
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <>
-              <Main onBurgerClick={handleBurgerClick} />
-              <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
-            </>
-          }
-        />
-        <Route
-          path="/movies"
-          element={
-            <>
-              <Movies onBurgerClick={handleBurgerClick} />
-              <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
-            </>
-          }
-        />
-        <Route
-          path="/saved-movies"
-          element={
-            <>
-              <SavedMovies onBurgerClick={handleBurgerClick} movies={movies} />
-              <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
-            </>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Profile onBurgerClick={handleBurgerClick} />
-              <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
-            </>
-          }
-        />
-        <Route
-          path="/signup"
-          element={<Register handleRegister={handleRegister} />}
-        />
-        <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      <div className="page">
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Main onBurgerClick={handleBurgerClick} />
+                <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
+              </>
+            }
+          />
+          <Route
+            path="/movies"
+            element={
+              <>
+                <Movies
+                  onBurgerClick={handleBurgerClick} movies={movies}
+                />
+                <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
+              </>
+            }
+          />
+          <Route
+            path="/saved-movies"
+            element={
+              <>
+                <SavedMovies
+                  onBurgerClick={handleBurgerClick}
+                  movies={movies}
+                />
+                <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Profile onBurgerClick={handleBurgerClick} />
+                <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
+              </>
+            }
+          />
+          <Route
+            path="/signup"
+            element={<Register handleRegister={handleRegister} />}
+          />
+          <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </CurrentUserContext.Provider>
   );
 }

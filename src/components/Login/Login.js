@@ -4,16 +4,12 @@ import logo from "../../images/logo.svg";
 import "./Login.css";
 import { useFormWithValidation } from "../../utils/UseValidation";
 
-
 function Login({ handleLogin }) {
-
   const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (evt) => {
-
     evt.preventDefault();
-
-    handleLogin({ email: values.email, password: values.password });
+    handleLogin(values.email, values.password);
   };
 
   return (
@@ -23,8 +19,7 @@ function Login({ handleLogin }) {
           <img className="login__logo" alt="Логотип" src={logo} />
         </Link>
         <h1 className="login__title">Рады видеть!</h1>
-        <form className="login__form" noValidate
-          onSubmit={handleSubmit}>
+        <form className="login__form" noValidate onSubmit={handleSubmit}>
           <label className="login__label">E-mail</label>
           <input
             className="login__input"
@@ -35,7 +30,7 @@ function Login({ handleLogin }) {
             maxLength={40}
             placeholder="E-mail"
             required
-            value={values.email}
+            value={values.email || ""}
             onChange={handleChange}
             pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
           />
@@ -48,18 +43,18 @@ function Login({ handleLogin }) {
             name="password"
             placeholder="Пароль"
             required
-            value={values.password}
+            value={values.password || ""}
             onChange={handleChange}
           />
           <span className="login__error">{errors.password || ""}</span>
           <button type="submit" disabled={!isValid} className="login__button">
-          Войти
+            Войти
           </button>
         </form>
         <p className="login__text">
-        Еще не зарегистрированы?{" "}
+          Еще не зарегистрированы?{" "}
           <Link className="login__link link" to="/signup">
-          Регистрация
+            Регистрация
           </Link>
         </p>
       </section>

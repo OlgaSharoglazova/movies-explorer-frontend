@@ -20,7 +20,7 @@ function App() {
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isLoggedIn, setisLoggedIn] = React.useState(false);
   const [userData, setUserData] = React.useState({});
-  const [currentUser, setСurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
 
   const navigate = useNavigate();
@@ -87,6 +87,13 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
+  function handleLogout() {
+    setisLoggedIn(false);
+    setCurrentUser({});
+    localStorage.clear();
+    navigate("/", { replace: true })
+  }
+
   //получение всех фильмов
 
   React.useEffect(() => {
@@ -97,6 +104,29 @@ function App() {
     })
     .catch((err) => console.log(`Ошибка: ${err}`));
   })
+
+  // получение данных пользователя
+  React.useEffect( () => {
+    const token = localStorage.getItem("jwt");
+    if (token) { 
+      mainApi.getProfile()
+      .then((userdata) => {
+        setCurrentUser(userdata);
+      })
+      .catch( (err) => { console.log(`Ошибка: ${err}`) })
+    }
+  }, [isLoggedIn])
+
+  // обновление данных пользователя
+
+  function handleUpdateUser(dataUser) {
+    mainApi
+      .editProfile(dataUser)
+      .then((newData) => {
+        setCurrentUser(newData);
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
+  }
 
   
   return (
@@ -140,7 +170,7 @@ function App() {
             path="/profile"
             element={
               <>
-                <Profile onBurgerClick={handleBurgerClick} />
+                <Profile onBurgerClick={handleBurgerClick} onLogout={handleLogout} isSuccess={isSuccess} onUpdateUser={handleUpdateUser} />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>
             }

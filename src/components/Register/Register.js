@@ -19,7 +19,7 @@ function Register({ handleRegister }) {
           <img className="register__logo" alt="Логотип" src={logo} />
         </Link>
         <h1 className="register__title">Добро пожаловать!</h1>
-        <form className="register__form" noValidate onSubmit={handleSubmit}>
+        <form name="register-form" className="register__form" noValidate onSubmit={handleSubmit}>
           <label className="register__label">Имя</label>
           <input
             className="register__input"

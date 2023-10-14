@@ -71,6 +71,15 @@
   color: #ee3465;
 }
 
+.profile__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12;
+  color: #ee3465;
+  margin-top: 10px;
+  padding: 0;
+}
+
 .profile__actions {
   display: flex;
   flex-direction: column;

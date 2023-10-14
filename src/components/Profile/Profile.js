@@ -52,8 +52,8 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
                   onChange={handleChange}
                   disabled={isEditing ? false : true}
                 />
-                <span className="profile__error">{errors.name || ""}</span>
               </div>
+              <span className="profile__error">{errors.name || ""}</span>
               <div className="profile__line"></div>
               <div className="profile__input-container">
                 <label className="profile__label">E-mail</label>
@@ -69,8 +69,8 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
                   pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
                   disabled={isEditing ? false : true}
                 />
-                <span className="profile__error">{errors.email || ""}</span>
               </div>
+              <span className="profile__error">{errors.email || ""}</span>
             </fieldset>
             <div className="profile__actions">
               {isEditing ? (

@@ -51,6 +51,8 @@ function App() {
     //eslint-disable-next-line
   }, []);
 
+  // открытие и закрытие меню навигации
+  
   function handleBurgerClick() {
     setIsMenuOpened(true);
   }
@@ -87,35 +89,41 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
+  // выход из аккаунта
+
   function handleLogout() {
     setisLoggedIn(false);
     setCurrentUser({});
     localStorage.clear();
-    navigate("/", { replace: true })
+    navigate("/", { replace: true });
   }
-
-  //получение всех фильмов
+ 
+  // получение всех фильмов
 
   React.useEffect(() => {
-    moviesApi.getMovies()
-    .then(() => {
-      setMovies(movies);
-      localStorage.setItem("allMovies", JSON.stringify(movies));
-    })
-    .catch((err) => console.log(`Ошибка: ${err}`));
-  })
+    moviesApi
+      .getMovies()
+      .then(() => {
+        setMovies(movies);
+        localStorage.setItem("allMovies", JSON.stringify(movies));
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
+  });
 
   // получение данных пользователя
-  React.useEffect( () => {
+  React.useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (token) { 
-      mainApi.getProfile()
-      .then((userdata) => {
-        setCurrentUser(userdata);
-      })
-      .catch( (err) => { console.log(`Ошибка: ${err}`) })
+    if (token) {
+      mainApi
+        .getProfile()
+        .then((userdata) => {
+          setCurrentUser(userdata);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn]);
 
   // обновление данных пользователя
 
@@ -128,7 +136,6 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
-  
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -138,7 +145,10 @@ function App() {
             path="/"
             element={
               <>
-                <Main onBurgerClick={handleBurgerClick} />
+                <Main
+                  onBurgerClick={handleBurgerClick}
+                  isLoggedIn={isLoggedIn}
+                />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>
             }
@@ -147,9 +157,7 @@ function App() {
             path="/movies"
             element={
               <>
-                <Movies
-                  onBurgerClick={handleBurgerClick} movies={movies}
-                />
+                <Movies onBurgerClick={handleBurgerClick} movies={movies} />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>
             }
@@ -170,7 +178,12 @@ function App() {
             path="/profile"
             element={
               <>
-                <Profile onBurgerClick={handleBurgerClick} onLogout={handleLogout} isSuccess={isSuccess} onUpdateUser={handleUpdateUser} />
+                <Profile
+                  onBurgerClick={handleBurgerClick}
+                  onLogout={handleLogout}
+                  isSuccess={isSuccess}
+                  onUpdateUser={handleUpdateUser}
+                />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>
             }

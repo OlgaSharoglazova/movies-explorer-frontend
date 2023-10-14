@@ -9,10 +9,10 @@ import Portfolio from "../Portfolio/Portfolio";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-function Main({ onBurgerClick }) {
+function Main({ onBurgerClick, isLoggedIn }) {
   return (
     <>
-      <Header onBurgerClick={onBurgerClick} ></Header>
+      <Header onBurgerClick={onBurgerClick} isLoggedIn={isLoggedIn}></Header>
       <main className="main">
         <Promo></Promo>
         <NavTab></NavTab>

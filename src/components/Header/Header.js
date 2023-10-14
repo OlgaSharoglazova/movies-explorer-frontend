@@ -3,9 +3,8 @@ import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
-function Header({ onBurgerClick }) {
+function Header({ onBurgerClick, isLoggedIn }) {
   const location = useLocation();
-  const isAuthorized = true;
 
   if (location.pathname === "/") {
     return (
@@ -14,7 +13,7 @@ function Header({ onBurgerClick }) {
           <Link to={"/"} className="header__logo link">
             <img className="header__logo-icon" alt="Логотип" src={logo} />
           </Link>
-          {isAuthorized ? (
+          {isLoggedIn ? (
             <>
             <div className="header__nav">
               <div className="header__movie-links">
@@ -64,7 +63,7 @@ function Header({ onBurgerClick }) {
               Аккаунт
             </Link>
           </div>
-          <BurgerMenu />
+          <BurgerMenu onBurgerClick={onBurgerClick}/>
         </div>
       </header>
     );

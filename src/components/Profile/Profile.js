@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/UseValidation";
 
-function Profile({ onUpdateUser, onLogout }) {
+function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -24,7 +24,7 @@ function Profile({ onUpdateUser, onLogout }) {
 
   return (
     <>
-      <Header></Header>
+      <Header onBurgerClick={onBurgerClick}></Header>
       <main className="profile">
         <section className="profile__container">
           <h1 className="profile__title">{`Привет, ${

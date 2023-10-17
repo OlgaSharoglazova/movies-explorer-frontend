@@ -11,7 +11,6 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import * as auth from "../../utils/AuthApi";
 import { mainApi } from "../../utils/MainApi";
-import { moviesApi } from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
@@ -21,7 +20,7 @@ function App() {
   const [isLoggedIn, setisLoggedIn] = React.useState(false);
   const [userData, setUserData] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
-  const [movies, setMovies] = React.useState([]);
+  // const [movies, setMovies] = React.useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +51,7 @@ function App() {
   }, []);
 
   // открытие и закрытие меню навигации
-  
+
   function handleBurgerClick() {
     setIsMenuOpened(true);
   }
@@ -97,18 +96,6 @@ function App() {
     localStorage.clear();
     navigate("/", { replace: true });
   }
- 
-  // получение всех фильмов
-
-  React.useEffect(() => {
-    moviesApi
-      .getMovies()
-      .then(() => {
-        setMovies(movies);
-        localStorage.setItem("allMovies", JSON.stringify(movies));
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-  });
 
   // получение данных пользователя
   React.useEffect(() => {
@@ -157,7 +144,11 @@ function App() {
             path="/movies"
             element={
               <>
-                <Movies onBurgerClick={handleBurgerClick} movies={movies} />
+                <ProtectedRoute
+                  element={Movies}
+                  onBurgerClick={handleBurgerClick}
+                  isLoggedIn={isLoggedIn}
+                />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>
             }
@@ -166,9 +157,10 @@ function App() {
             path="/saved-movies"
             element={
               <>
-                <SavedMovies
+                <ProtectedRoute
+                  element={SavedMovies}
                   onBurgerClick={handleBurgerClick}
-                  movies={movies}
+                  isLoggedIn={isLoggedIn}
                 />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>
@@ -178,11 +170,13 @@ function App() {
             path="/profile"
             element={
               <>
-                <Profile
+                <ProtectedRoute
+                  element={Profile}
                   onBurgerClick={handleBurgerClick}
                   onLogout={handleLogout}
                   isSuccess={isSuccess}
                   onUpdateUser={handleUpdateUser}
+                  isLoggedIn={isLoggedIn}
                 />
                 <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
               </>

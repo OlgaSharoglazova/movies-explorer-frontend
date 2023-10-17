@@ -45,6 +45,18 @@
   opacity: 0.8;
 }
 
+.searchform__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  border: none;
+  display: block;
+  position: absolute;
+  bottom: -5px;
+  left: 0px;
+}
+
 @media screen and (max-width: 1150px) {
     .searchform {
         width: 708px;

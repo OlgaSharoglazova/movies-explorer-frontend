@@ -1,13 +1,14 @@
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
+import { MIN_IN_HOUR, ONE_HOUR } from "../../utils/constants";
 
 function MoviesCard({ movie, isLiked, handleDelMovie, handleSaveMovie }) {
   const location = useLocation();
 
   function calculateDuration(duration) {
-    const minutes = duration % 60;
-    const hours = (duration - minutes) / 60;
-    if (hours < 1) {
+    const minutes = duration % MIN_IN_HOUR;
+    const hours = (duration - minutes) / MIN_IN_HOUR;
+    if (hours < ONE_HOUR) {
       return `${minutes}м`;
     } else {
       return `${hours}ч ${minutes}м`;
@@ -35,7 +36,7 @@ function MoviesCard({ movie, isLiked, handleDelMovie, handleSaveMovie }) {
         </a>
         <div className="movies-card__description">
           <div className="movies-card__info">
-            <h3 className="movies-card__title">{movie.nameRu}</h3>
+            <h3 className="movies-card__title">{movie.nameRU}</h3>
             <p className="movies-card__duration">{calculateDuration(movie.duration)}</p>
           </div>
           {location.pathname === "/saved-movies" ? (

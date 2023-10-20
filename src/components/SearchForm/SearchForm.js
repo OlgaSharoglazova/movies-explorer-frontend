@@ -9,24 +9,28 @@ const [searchError, setSearchError] = React.useState("");
 const location = useLocation();
 
 function onChange(evt) {
-  setSearchValue(evt.target.value)
+  const value = evt.target.value;
+  setSearchValue(value);
+  localStorage.setItem("searchform", JSON.stringify(value));
 }
 
  function handleSearchMovies(evt) {
   evt.preventDefault();
-  // searchMovies();
-  if (location.pathname === "/movies") {
-    searchValue
-      ? searchMovies(searchValue)
-      : setSearchError("Введите ключевое слово");
-  } else {
-    searchMovies(searchValue);
-  }
+   searchMovies();
+   if (location.pathname === "/movies") {
+     searchValue
+       ? console.log(searchValue)
+       : setSearchError("Введите ключевое слово");
+       console.log(searchError);
+   } else {
+    // searchMovies(searchValue);
+    console.log(searchValue);
+   }
  }
 
- React.useEffect(() => {
-  setSearchError("");
-}, [searchValue]);
+  React.useEffect(() => {
+   setSearchError("");
+ }, [searchValue]);
 
   return (
     <div className="searchform">

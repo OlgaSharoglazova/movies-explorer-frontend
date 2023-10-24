@@ -87,11 +87,13 @@ function App() {
 
   function handleMovieDelete(movie) {
     console.log(movie);
-    const removedMovie = savedMovies.find((item) => item.movieId === movie.id);
-    console.log(removedMovie);
+    if (location.pathname === "/movies") {
+      const removedMovie = savedMovies.find((item) => item.movieId === movie.id);
+      console.log(removedMovie);
     mainApi
       .deleteMovie(removedMovie._id)
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         const newSavedMovies = savedMovies.filter(
           (savedMovie) => savedMovie.movieId !== movie.movieId
         );
@@ -101,6 +103,23 @@ function App() {
         setIsLiked(false);
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
+    } else {
+      const removedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
+      console.log(removedMovie);
+    mainApi
+      .deleteMovie(removedMovie._id)
+      .then((res) => {
+        console.log(res)
+        const newSavedMovies = savedMovies.filter(
+          (savedMovie) => savedMovie.movieId !== movie.movieId
+        );
+        console.log(newSavedMovies);
+        setSavedMovies(newSavedMovies);
+        localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
+        setIsLiked(false);
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
+    }
   }
 
   // проверка токена

@@ -33,7 +33,7 @@ function MoviesCard({
 
   React.useEffect(() => {
     if (location.pathname === "/movies") {
-      setIsLiked(savedMovies.some((item) => movie.id === item.movieId));
+      setIsLiked(savedMovies.some((item) => item.movieId === movie.id));
     }
   }, [savedMovies, location.pathname, movie.id, setIsLiked]);
 

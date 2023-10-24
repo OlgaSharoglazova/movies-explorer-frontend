@@ -73,12 +73,6 @@ function MoviesCardList({
     setCountMovies(countMovies + displayMoviesCards().add);
   }
 
-  // React.useEffect(() => {
-  //   if (location.pathname === "/saved-movies" && searchValue === '') {
-  //     setFoundMoviesSaved(JSON.parse(localStorage.getItem('savedMovies')))
-  //   }
-  // }, [searchValue]);
-
   return (
     <section className="movies-list">
       <ul className="movies-list__container">
@@ -96,7 +90,7 @@ function MoviesCardList({
                   //isLiked={isLiked}
                 />
               ))
-          : savedMovies.map((movie) => (
+          : filteredSavedMovies.map((movie) => (
               <MoviesCard
                 movie={movie}
                 key={movie.id || movie._id}

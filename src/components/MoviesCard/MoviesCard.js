@@ -3,10 +3,15 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import { MIN_IN_HOUR, ONE_HOUR } from "../../utils/constants";
 
-function MoviesCard({ movie, onLike, handleSaveMovie, handleMovieDelete, savedMovies }) {
+function MoviesCard({
+  movie,
+  onLike,
+  handleSaveMovie,
+  handleMovieDelete,
+  savedMovies,
+}) {
   const location = useLocation();
   const [isLiked, setIsLiked] = React.useState(false);
- // const isLiked = onLike(movie);
 
   function calculateDuration(duration) {
     const minutes = duration % MIN_IN_HOUR;
@@ -18,28 +23,19 @@ function MoviesCard({ movie, onLike, handleSaveMovie, handleMovieDelete, savedMo
     }
   }
 
-    function onMovieDelete() {
-     handleMovieDelete(movie)
-    }
+  function onMovieDelete() {
+    handleMovieDelete(movie);
+  }
 
   function onLikeMovie() {
     handleSaveMovie(movie);
   }
 
   React.useEffect(() => {
- if (location.pathname === "/movies") {
-   setIsLiked(savedMovies.some(item => movie.id === item.movieId))
- }
-  }, [savedMovies, location.pathname, movie.id, setIsLiked]) 
-
-//  function onLikeMovie() {
-//   if(savedMovies.some(item => movie.id === item.movieId)){
-//     setIsLiked(true);
-//     handleSaveMovie(movie);
-//   } else {
-//     setIsLiked(false);
-//   }
-//  }
+    if (location.pathname === "/movies") {
+      setIsLiked(savedMovies.some((item) => movie.id === item.movieId));
+    }
+  }, [savedMovies, location.pathname, movie.id, setIsLiked]);
 
   return (
     <li className="movies-card">
@@ -63,15 +59,28 @@ function MoviesCard({ movie, onLike, handleSaveMovie, handleMovieDelete, savedMo
         <div className="movies-card__description">
           <div className="movies-card__info">
             <h3 className="movies-card__title">{movie.nameRU}</h3>
-            <p className="movies-card__duration">{calculateDuration(movie.duration)}</p>
+            <p className="movies-card__duration">
+              {calculateDuration(movie.duration)}
+            </p>
           </div>
           {location.pathname === "/saved-movies" ? (
-            <button type="button" className="movies-card__del" onClick={onMovieDelete}></button>
+            <button
+              type="button"
+              className="movies-card__del"
+              onClick={onMovieDelete}
+            ></button>
+          ) : isLiked ? (
+            <button
+              type="button"
+              className="movies-card__active"
+              onClick={onMovieDelete}
+            ></button>
           ) : (
-            isLiked ?
-            <button type="button" className="movies-card__active" onClick={onMovieDelete}></button>
-            :
-            <button type="button" className="movies-card__save" onClick={onLikeMovie}></button>
+            <button
+              type="button"
+              className="movies-card__save"
+              onClick={onLikeMovie}
+            ></button>
           )}
         </div>
       </div>

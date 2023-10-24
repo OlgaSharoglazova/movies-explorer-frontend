@@ -7,8 +7,8 @@ import Footer from "../Footer/Footer";
 import { SHORT_FILM_DURATION } from "../../utils/constants";
 
 function SavedMovies({
-  onBurgerClick,
   savedMovies,
+  onBurgerClick,
   onSearch,
   onChange,
   searchValue,
@@ -18,6 +18,12 @@ function SavedMovies({
   onLike
 }) {
   const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);
+
+   React.useEffect(() => {
+   if (searchValue === "" & isChecked === false) {
+    setFilteredSavedMovies(JSON.parse(localStorage.getItem("savedmovies")))
+     }
+   }, [searchValue, isChecked]);
 
   React.useEffect(() => {
     if (isChecked) {

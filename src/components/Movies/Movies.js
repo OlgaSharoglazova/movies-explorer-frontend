@@ -19,10 +19,12 @@ function Movies({
   onLike,
   handleSaveMovie,
   handleMovieDelete,
-  isLiked
+  isLiked,
 }) {
   // const [searchError, setSearchError] = React.useState(false);
-  const [filteredMovies, setFilteredMovies] = React.useState(JSON.parse(localStorage.getItem("filteredmovies")) || []);
+  const [filteredMovies, setFilteredMovies] = React.useState(
+    JSON.parse(localStorage.getItem("filteredmovies")) || []
+  );
 
   // первый поиск
 
@@ -75,7 +77,7 @@ function Movies({
             onLike={onLike}
             handleSaveMovie={handleSaveMovie}
             handleMovieDelete={handleMovieDelete}
-           // isLiked={isLiked}
+            // isLiked={isLiked}
           ></MoviesCardList>
         </section>
       </main>
@@ -85,18 +87,3 @@ function Movies({
 }
 
 export default Movies;
-// function filter(allMovies) {
-//   if (isChecked) {
-//     return allMovies.filter(
-//       (movie) =>
-//         (movie.nameRU.toLowerCase().includes(searchInfo.toLowerCase()) ||
-//           movie.nameEN.toLowerCase().includes(searchInfo.toLowerCase())) &&
-//         movie.duration <= SHORT_FILM_DURATION
-//     );
-//   } else {
-//     return allMovies.filter(
-//       (movie) =>
-//         movie.nameRU.includes(searchInfo) || movie.nameEN.includes(searchInfo)
-//     );
-//   }
-// }

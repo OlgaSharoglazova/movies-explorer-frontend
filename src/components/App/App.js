@@ -86,13 +86,15 @@ function App() {
   // удаление фильиа
 
   function handleMovieDelete(movie) {
-    console.log(movie)
-    const removedMovie = savedMovies.find(item => item.movieId === movie.id);
-    console.log(removedMovie)
+    console.log(movie);
+    const removedMovie = savedMovies.find((item) => item.movieId === movie.id);
+    console.log(removedMovie);
     mainApi
       .deleteMovie(removedMovie._id)
       .then(() => {
-        const newSavedMovies = savedMovies.filter((savedMovie) => savedMovie.movieId !== movie.movieId);
+        const newSavedMovies = savedMovies.filter(
+          (savedMovie) => savedMovie.movieId !== movie.movieId
+        );
         console.log(newSavedMovies);
         setSavedMovies(newSavedMovies);
         localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
@@ -208,6 +210,18 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  // значение формы и чекбокса
+
+  React.useEffect(() => {
+    if (location.pathname === "/saved-movies") {
+      setSearchValue("");
+      setIsChecked(false);
+    } else {
+      setSearchValue(JSON.parse(localStorage.getItem("searchform")));
+      setIsChecked(JSON.parse(localStorage.getItem("checkbox")));
+    }
+  }, [location.pathname]);
+
   // получение всех фильмов
 
   function getAllMovies() {
@@ -293,10 +307,10 @@ function App() {
                     searchValue={searchValue}
                     onChangeCheckbox={handleChangeCheckbox}
                     isChecked={isChecked}
-                    savedMovies={savedMovies}
                     onLike={handleLikeMovie}
                     handleSaveMovie={handleSaveMovie}
                     handleMovieDelete={handleMovieDelete}
+                    savedMovies={savedMovies}
                   />
                   <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
                 </>
@@ -335,7 +349,6 @@ function App() {
 }
 
 export default App;
-
 
 // function handleMovieDelete(movieId) {
 //   console.log(movieId)

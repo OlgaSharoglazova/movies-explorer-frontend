@@ -1,9 +1,12 @@
+import React from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import { MIN_IN_HOUR, ONE_HOUR } from "../../utils/constants";
 
-function MoviesCard({ movie, isLiked, handleDelMovie, handleSaveMovie }) {
+function MoviesCard({ movie, onLike, handleSaveMovie, handleMovieDelete, savedMovies }) {
   const location = useLocation();
+  const [isLiked, setIsLiked] = React.useState(false);
+ // const isLiked = onLike(movie);
 
   function calculateDuration(duration) {
     const minutes = duration % MIN_IN_HOUR;
@@ -14,6 +17,29 @@ function MoviesCard({ movie, isLiked, handleDelMovie, handleSaveMovie }) {
       return `${hours}ч ${minutes}м`;
     }
   }
+
+    function onMovieDelete() {
+     handleMovieDelete(movie)
+    }
+
+  function onLikeMovie() {
+    handleSaveMovie(movie);
+  }
+
+  React.useEffect(() => {
+ if (location.pathname === "/movies") {
+   setIsLiked(savedMovies.some(item => movie.id === item.movieId))
+ }
+  }, [savedMovies, location.pathname, movie.id, setIsLiked]) 
+
+//  function onLikeMovie() {
+//   if(savedMovies.some(item => movie.id === item.movieId)){
+//     setIsLiked(true);
+//     handleSaveMovie(movie);
+//   } else {
+//     setIsLiked(false);
+//   }
+//  }
 
   return (
     <li className="movies-card">
@@ -40,12 +66,12 @@ function MoviesCard({ movie, isLiked, handleDelMovie, handleSaveMovie }) {
             <p className="movies-card__duration">{calculateDuration(movie.duration)}</p>
           </div>
           {location.pathname === "/saved-movies" ? (
-            <button type="button" className="movies-card__del" onClick={handleDelMovie}></button>
+            <button type="button" className="movies-card__del" onClick={onMovieDelete}></button>
           ) : (
             isLiked ?
-            <button type="button" className="movies-card__active" onClick={handleDelMovie}></button>
+            <button type="button" className="movies-card__active" onClick={onMovieDelete}></button>
             :
-            <button type="button" className="movies-card__save" onClick={handleSaveMovie}></button>
+            <button type="button" className="movies-card__save" onClick={onLikeMovie}></button>
           )}
         </div>
       </div>

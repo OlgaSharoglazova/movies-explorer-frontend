@@ -4,7 +4,6 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useLocation } from "react-router-dom";
 
 function SearchForm({
-  searchMovies,
   onChange,
   onSearch,
   searchValue,

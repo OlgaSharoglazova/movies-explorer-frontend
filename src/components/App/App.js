@@ -23,6 +23,10 @@ function App() {
   const [userData, setUserData] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoadding, setisLoadding] = React.useState(true);
+  const [isLiked, setIsLiked] = React.useState(false);
+  const [savedMovies, setSavedMovies] = React.useState(
+    JSON.parse(localStorage.getItem("savedmovies")) || []
+  );
   const [allMovies, setAllMovies] = React.useState(
     JSON.parse(localStorage.getItem("allmovies")) || []
   );
@@ -32,10 +36,11 @@ function App() {
   const [isChecked, setIsChecked] = React.useState(
     JSON.parse(localStorage.getItem("checkbox")) || false
   );
-  // const [movies, setMovies] = React.useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // изменение данных в форме поиска
 
   function handleChangeSearchForm(evt) {
     const value = evt.target.value;
@@ -43,16 +48,57 @@ function App() {
     localStorage.setItem("searchform", JSON.stringify(value));
   }
 
+  // функция поиска
+
   function handleSearchMovies(evt) {
     evt.preventDefault();
-    //searchMovies();
-    console.log(searchValue);
   }
+
+  // переключение короткометражек
 
   function handleChangeCheckbox(evt) {
     const value = evt.target.checked;
     setIsChecked(value);
     localStorage.setItem("checkbox", JSON.stringify(value));
+  }
+
+  // сохранение фильма
+
+  function handleLikeMovie(movie) {
+    return savedMovies.some((i) => i.movieId === movie.id);
+  }
+
+  function handleSaveMovie(movie) {
+    mainApi
+      .saveMovie(movie)
+      .then((newMovie) => {
+        console.log(newMovie);
+        setIsLiked(true);
+        setSavedMovies([newMovie, ...savedMovies]);
+        localStorage.setItem(
+          "savedmovies",
+          JSON.stringify([newMovie, ...savedMovies])
+        );
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
+  }
+
+  // удаление фильиа
+
+  function handleMovieDelete(movie) {
+    console.log(movie)
+    const removedMovie = savedMovies.find(item => item.movieId === movie.id);
+    console.log(removedMovie)
+    mainApi
+      .deleteMovie(removedMovie._id)
+      .then(() => {
+        const newSavedMovies = savedMovies.filter((savedMovie) => savedMovie.movieId !== movie.movieId);
+        console.log(newSavedMovies);
+        setSavedMovies(newSavedMovies);
+        localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
+        setIsLiked(false);
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
   // проверка токена
@@ -136,8 +182,8 @@ function App() {
     if (token) {
       mainApi
         .getProfile()
-        .then((userdata) => {
-          setCurrentUser(userdata);
+        .then((userData) => {
+          setCurrentUser(userData);
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
@@ -145,16 +191,22 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  // обновление данных пользователя
+  // получение сохраненных фильмов
 
-  function handleUpdateUser(dataUser) {
-    mainApi
-      .editProfile(dataUser)
-      .then((newData) => {
-        setCurrentUser(newData);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-  }
+  React.useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      mainApi
+        .getSavedMovies()
+        .then((moviesData) => {
+          localStorage.setItem("savedmovies", JSON.stringify(moviesData));
+          setSavedMovies(moviesData);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    }
+  }, [isLoggedIn]);
 
   // получение всех фильмов
 
@@ -169,9 +221,19 @@ function App() {
       .catch((err) => console.log(`Ошибка: ${err}`))
       .finally(() => {
         setisLoadding(false);
-      })
+      });
   }
 
+  // обновление данных пользователя
+
+  function handleUpdateUser(dataUser) {
+    mainApi
+      .editProfile(dataUser)
+      .then((newData) => {
+        setCurrentUser(newData);
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
+  }
 
   return (
     <div className="page">
@@ -208,6 +270,11 @@ function App() {
                     allMovies={allMovies}
                     onChangeCheckbox={handleChangeCheckbox}
                     isChecked={isChecked}
+                    savedMovies={savedMovies}
+                    onLike={handleLikeMovie}
+                    handleSaveMovie={handleSaveMovie}
+                    handleMovieDelete={handleMovieDelete}
+                    isLiked={isLiked}
                   />
                   <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
                 </>
@@ -226,6 +293,10 @@ function App() {
                     searchValue={searchValue}
                     onChangeCheckbox={handleChangeCheckbox}
                     isChecked={isChecked}
+                    savedMovies={savedMovies}
+                    onLike={handleLikeMovie}
+                    handleSaveMovie={handleSaveMovie}
+                    handleMovieDelete={handleMovieDelete}
                   />
                   <Navigation isOpen={isMenuOpened} onClose={closeMenu} />
                 </>
@@ -264,3 +335,19 @@ function App() {
 }
 
 export default App;
+
+
+// function handleMovieDelete(movieId) {
+//   console.log(movieId)
+//   mainApi
+//     .deleteMovie(movieId)
+//     .then(() => {
+//       const newSavedMovies = savedMovies.filter(
+//         (item) => item._id !== movieId
+//       );
+//       setSavedMovies(newSavedMovies);
+//       localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
+//       setIsLiked(false);
+//     })
+//     .catch((err) => console.log(`Ошибка: ${err}`));
+// }

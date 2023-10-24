@@ -48,12 +48,6 @@ function App() {
     localStorage.setItem("searchform", JSON.stringify(value));
   }
 
-  // функция поиска
-
-  function handleSearchMovies(evt) {
-    evt.preventDefault();
-  }
-
   // переключение короткометражек
 
   function handleChangeCheckbox(evt) {
@@ -64,15 +58,10 @@ function App() {
 
   // сохранение фильма
 
-  function handleLikeMovie(movie) {
-    return savedMovies.some((i) => i.movieId === movie.id);
-  }
-
   function handleSaveMovie(movie) {
     mainApi
       .saveMovie(movie)
       .then((newMovie) => {
-        console.log(newMovie);
         setIsLiked(true);
         setSavedMovies([newMovie, ...savedMovies]);
         localStorage.setItem(
@@ -86,39 +75,37 @@ function App() {
   // удаление фильиа
 
   function handleMovieDelete(movie) {
-    console.log(movie);
     if (location.pathname === "/movies") {
-      const removedMovie = savedMovies.find((item) => item.movieId === movie.id);
-      console.log(removedMovie);
-    mainApi
-      .deleteMovie(removedMovie._id)
-      .then((res) => {
-        console.log(res)
-        const newSavedMovies = savedMovies.filter(
-          (savedMovie) => savedMovie.movieId !== movie.movieId
-        );
-        console.log(newSavedMovies);
-        setSavedMovies(newSavedMovies);
-        localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
-        setIsLiked(false);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      const removedMovie = savedMovies.find(
+        (item) => item.movieId === movie.id
+      );
+      mainApi
+        .deleteMovie(removedMovie._id)
+        .then(() => {
+          const newSavedMovies = savedMovies.filter(
+            (savedMovie) => savedMovie.movieId !== movie.movieId
+          );
+          setSavedMovies(newSavedMovies);
+          localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
+          setIsLiked(false);
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
     } else {
-      const removedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
-      console.log(removedMovie);
-    mainApi
-      .deleteMovie(removedMovie._id)
-      .then((res) => {
-        console.log(res)
-        const newSavedMovies = savedMovies.filter(
-          (savedMovie) => savedMovie.movieId !== movie.movieId
-        );
-        console.log(newSavedMovies);
-        setSavedMovies(newSavedMovies);
-        localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
-        setIsLiked(false);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      const removedMovie = savedMovies.find(
+        (item) => item.movieId === movie.movieId
+      );
+      mainApi
+        .deleteMovie(removedMovie._id)
+        .then(() => {
+          const newSavedMovies = savedMovies.filter(
+            (savedMovie) => savedMovie.movieId !== movie.movieId
+          );
+          console.log(newSavedMovies);
+          setSavedMovies(newSavedMovies);
+          localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
+          setIsLiked(false);
+        })
+        .catch((err) => console.log(`Ошибка: ${err}`));
     }
   }
 
@@ -229,18 +216,6 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  // значение формы и чекбокса
-
-  React.useEffect(() => {
-    if (location.pathname === "/saved-movies") {
-      setSearchValue("");
-      setIsChecked(false);
-    } else {
-      setSearchValue(JSON.parse(localStorage.getItem("searchform")));
-      setIsChecked(JSON.parse(localStorage.getItem("checkbox")));
-    }
-  }, [location.pathname]);
-
   // получение всех фильмов
 
   function getAllMovies() {
@@ -297,14 +272,12 @@ function App() {
                     onBurgerClick={handleBurgerClick}
                     isLoggedIn={isLoggedIn}
                     getAllMovies={getAllMovies}
-                    onSearch={handleSearchMovies}
                     onChange={handleChangeSearchForm}
                     searchValue={searchValue}
                     allMovies={allMovies}
                     onChangeCheckbox={handleChangeCheckbox}
                     isChecked={isChecked}
                     savedMovies={savedMovies}
-                    onLike={handleLikeMovie}
                     handleSaveMovie={handleSaveMovie}
                     handleMovieDelete={handleMovieDelete}
                     isLiked={isLiked}
@@ -321,12 +294,10 @@ function App() {
                     element={SavedMovies}
                     onBurgerClick={handleBurgerClick}
                     isLoggedIn={isLoggedIn}
-                    onSearch={handleSearchMovies}
                     onChange={handleChangeSearchForm}
                     searchValue={searchValue}
                     onChangeCheckbox={handleChangeCheckbox}
                     isChecked={isChecked}
-                    onLike={handleLikeMovie}
                     handleSaveMovie={handleSaveMovie}
                     handleMovieDelete={handleMovieDelete}
                     savedMovies={savedMovies}
@@ -368,18 +339,3 @@ function App() {
 }
 
 export default App;
-
-// function handleMovieDelete(movieId) {
-//   console.log(movieId)
-//   mainApi
-//     .deleteMovie(movieId)
-//     .then(() => {
-//       const newSavedMovies = savedMovies.filter(
-//         (item) => item._id !== movieId
-//       );
-//       setSavedMovies(newSavedMovies);
-//       localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
-//       setIsLiked(false);
-//     })
-//     .catch((err) => console.log(`Ошибка: ${err}`));
-// }

@@ -16,28 +16,22 @@ function Movies({
   isChecked,
   onChangeCheckbox,
   savedMovies,
-  onLike,
   handleSaveMovie,
   handleMovieDelete,
-  isLiked,
 }) {
-  // const [searchError, setSearchError] = React.useState(false);
   const [filteredMovies, setFilteredMovies] = React.useState(
     JSON.parse(localStorage.getItem("filteredmovies")) || []
   );
 
   // первый поиск
-
-  function searchMovies() {
-    if (allMovies.length === 0) {
-      getAllMovies();
-    }
-  }
+  React.useEffect(() => {
+    if (allMovies.length === 0 && searchValue !== "") getAllMovies();
+  });
 
   // фильтрация
 
-  React.useEffect(() => {
-    if (isChecked) {
+  function handleFilter() {
+    if (isChecked && searchValue !== "") {
       const filteredMovies = allMovies.filter(
         (movie) =>
           (movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -46,7 +40,8 @@ function Movies({
       );
       localStorage.setItem("filteredmovies", JSON.stringify(filteredMovies));
       setFilteredMovies(filteredMovies);
-    } else {
+    }
+    if (searchValue !== "") {
       const filteredMovies = allMovies.filter(
         (movie) =>
           movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -55,7 +50,7 @@ function Movies({
       localStorage.setItem("filteredmovies", JSON.stringify(filteredMovies));
       setFilteredMovies(filteredMovies);
     }
-  }, [searchValue, isChecked]);
+  }
 
   return (
     <>
@@ -63,21 +58,19 @@ function Movies({
       <main className="movies">
         <section className="movies__container">
           <SearchForm
-            searchMovies={searchMovies}
             onSearch={onSearch}
             onChange={onChange}
             searchValue={searchValue}
             isChecked={isChecked}
             onChangeCheckbox={onChangeCheckbox}
+            handleFilter={handleFilter}
           ></SearchForm>
           <MoviesCardList
             movies={filteredMovies}
             savedMovies={savedMovies}
             searchValue={searchValue}
-            onLike={onLike}
             handleSaveMovie={handleSaveMovie}
             handleMovieDelete={handleMovieDelete}
-            // isLiked={isLiked}
           ></MoviesCardList>
         </section>
       </main>

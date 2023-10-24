@@ -14,15 +14,10 @@ import {
 
 function MoviesCardList({
   movies,
-  onMovieSave,
-  onMovieDelete,
   savedMovies,
   filteredSavedMovies,
-  searchValue,
-  onLike,
   handleSaveMovie,
   handleMovieDelete,
-  isLiked
 }) {
   const [countMovies, setCountMovies] = React.useState("");
   const location = useLocation();
@@ -77,25 +72,21 @@ function MoviesCardList({
     <section className="movies-list">
       <ul className="movies-list__container">
         {location.pathname === "/movies"
-          ? movies
-              .slice(0, countMovies)
-              .map((movie) => (
-                <MoviesCard
-                  movie={movie}
-                  key={movie.id || movie._id}
-                  onLike={onLike}
-                  handleSaveMovie={handleSaveMovie}
-                  savedMovies={savedMovies}
-                  handleMovieDelete={handleMovieDelete}
-                  //isLiked={isLiked}
-                />
-              ))
+          ? movies.slice(0, countMovies).map((movie) => (
+              <MoviesCard
+                movie={movie}
+                key={movie.id || movie._id}
+                handleSaveMovie={handleSaveMovie}
+                savedMovies={savedMovies}
+                handleMovieDelete={handleMovieDelete}
+                //isLiked={isLiked}
+              />
+            ))
           : filteredSavedMovies.map((movie) => (
               <MoviesCard
                 movie={movie}
                 key={movie.id || movie._id}
                 savedMovies={savedMovies}
-                onLike={onLike}
                 handleSaveMovie={handleSaveMovie}
                 handleMovieDelete={handleMovieDelete}
               />

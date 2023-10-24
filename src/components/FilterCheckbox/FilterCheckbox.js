@@ -16,11 +16,3 @@ function FilterCheckbox({ isChecked, onChangeCheckbox }) {
 }
 
 export default FilterCheckbox;
-
-// const [isChecked, setIsChecked] = React.useState(false);
-
-// function check(evt) {
-//   const value = evt.target.checked;
-//   setIsChecked(value);
-//   localStorage.setItem("checkbox", JSON.stringify(value));
-// }

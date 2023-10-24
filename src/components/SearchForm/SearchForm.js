@@ -5,11 +5,20 @@ import { useLocation } from "react-router-dom";
 
 function SearchForm({
   onChange,
-  onSearch,
   searchValue,
   isChecked,
   onChangeCheckbox,
+  handleFilter,
 }) {
+  const location = useLocation();
+
+  function onSearch(evt) {
+    evt.preventDefault();
+    if (location.pathname === "/movies") {
+      handleFilter();
+    }
+  }
+
   return (
     <div className="searchform">
       <form
@@ -38,33 +47,3 @@ function SearchForm({
 }
 
 export default SearchForm;
-
-// const [searchValue, setSearchValue] = React.useState(
-//   JSON.parse(localStorage.getItem("searchform")) || ""
-// );
-// const [searchError, setSearchError] = React.useState("");
-// const location = useLocation();
-
-// function onChange(evt) {
-//   const value = evt.target.value;
-//   setSearchValue(value);
-//   localStorage.setItem("searchform", JSON.stringify(value));
-// }
-
-//  function handleSearchMovies(evt) {
-//   evt.preventDefault();
-//    searchMovies();
-//    if (location.pathname === "/movies") {
-//      searchValue
-//        ? console.log(searchValue)
-//        : setSearchError("Введите ключевое слово");
-//        console.log(searchError);
-//    } else {
-//     // searchMovies(searchValue);
-//     console.log(searchValue);
-//    }
-//  }
-
-//   React.useEffect(() => {
-//    setSearchError("");
-//  }, [searchValue]);

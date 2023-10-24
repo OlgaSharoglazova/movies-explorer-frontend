@@ -15,15 +15,14 @@ function SavedMovies({
   isChecked,
   onChangeCheckbox,
   handleMovieDelete,
-  onLike
 }) {
   const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);
 
-   React.useEffect(() => {
-   if (searchValue === "" & isChecked === false) {
-    setFilteredSavedMovies(JSON.parse(localStorage.getItem("savedmovies")))
-     }
-   }, [searchValue, isChecked]);
+  React.useEffect(() => {
+    if (searchValue === "" && isChecked === false) {
+      setFilteredSavedMovies(JSON.parse(localStorage.getItem("savedmovies")));
+    }
+  }, [searchValue, isChecked]);
 
   React.useEffect(() => {
     if (isChecked) {
@@ -61,7 +60,6 @@ function SavedMovies({
             filteredSavedMovies={filteredSavedMovies}
             searchValue={searchValue}
             handleMovieDelete={handleMovieDelete}
-            onLike={onLike}
           ></MoviesCardList>
         </section>
       </main>

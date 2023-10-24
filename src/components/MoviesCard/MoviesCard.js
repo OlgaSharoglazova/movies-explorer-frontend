@@ -5,7 +5,6 @@ import { MIN_IN_HOUR, ONE_HOUR } from "../../utils/constants";
 
 function MoviesCard({
   movie,
-  onLike,
   handleSaveMovie,
   handleMovieDelete,
   savedMovies,
@@ -32,10 +31,8 @@ function MoviesCard({
   }
 
   React.useEffect(() => {
-    if (location.pathname === "/movies") {
-      setIsLiked(savedMovies.some((item) => item.movieId === movie.id));
-    }
-  }, [savedMovies, location.pathname, movie.id, setIsLiked]);
+    setIsLiked(savedMovies.some((item) => item.movieId === movie.id));
+  }, [savedMovies, movie.id]);
 
   return (
     <li className="movies-card">

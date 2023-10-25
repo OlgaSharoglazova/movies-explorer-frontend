@@ -9,7 +9,11 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
   const [isEditing, setIsEditing] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isChanged, setIsChanged] = React.useState(false);
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  React.useEffect(() => {
+    resetForm({ email: currentUser.email, name: currentUser.name }, {}, false);
+  }, [currentUser, resetForm]);
 
   function handleStartEditing() {
     setIsEditing(true);
@@ -44,7 +48,7 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
                   id="name"
                   type="text"
                   name="name"
-                  placeholder={currentUser.name}
+                  placeholder="Имя"
                   required
                   minLength="2"
                   maxLength="30"
@@ -62,7 +66,7 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
                   id="email"
                   type="email"
                   name="email"
-                  placeholder={currentUser.email}
+                  placeholder="E-mail"
                   required
                   value={values.email || ""}
                   onChange={handleChange}

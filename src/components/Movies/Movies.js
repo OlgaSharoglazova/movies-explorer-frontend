@@ -18,10 +18,15 @@ function Movies({
   savedMovies,
   handleSaveMovie,
   handleMovieDelete,
+  isLoggedIn
 }) {
   const [filteredMovies, setFilteredMovies] = React.useState(
     JSON.parse(localStorage.getItem("filteredmovies")) || []
   );
+
+  React.useEffect(() => {
+    if (!isLoggedIn) setFilteredMovies([]);
+  }, [isLoggedIn]);
 
   // первый поиск
   React.useEffect(() => {

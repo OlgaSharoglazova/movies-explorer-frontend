@@ -42,6 +42,7 @@ function Login({ handleLogin }) {
             type="password"
             name="password"
             placeholder="Пароль"
+            minLength="6"
             required
             value={values.password || ""}
             onChange={handleChange}

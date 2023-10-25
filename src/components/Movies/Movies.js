@@ -55,7 +55,7 @@ function Movies({
       localStorage.setItem("filteredmovies", JSON.stringify(filteredMovies));
       setFilteredMovies(filteredMovies);
     }
-  }, [searchValue, isChecked]);
+  }, [searchValue, isChecked, savedMovies, allMovies]);
 
   return (
     <>
@@ -68,7 +68,6 @@ function Movies({
             searchValue={searchValue}
             isChecked={isChecked}
             onChangeCheckbox={onChangeCheckbox}
-           // handleFilter={handleFilter}
           ></SearchForm>
           <MoviesCardList
             movies={filteredMovies}

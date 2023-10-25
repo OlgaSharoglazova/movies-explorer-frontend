@@ -103,7 +103,7 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
                   <button
                     type="submit"
                     className="profile__submit-button button"
-                    disabled={!isValid || isChanged}
+                    disabled={!isValid || (values.name === currentUser.name & values.email === currentUser.email)}
                   >
                     Сохранить
                   </button>

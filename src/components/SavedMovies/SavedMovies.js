@@ -41,7 +41,7 @@ function SavedMovies({
       );
       setFilteredSavedMovies(filteredMovies);
     }
-  }, [searchValue, isChecked]);
+  }, [searchValue, isChecked, savedMovies]);
 
   return (
     <>

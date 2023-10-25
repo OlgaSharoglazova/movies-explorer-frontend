@@ -84,7 +84,7 @@ function App() {
         .deleteMovie(removedMovie._id)
         .then(() => {
           const newSavedMovies = savedMovies.filter(
-            (savedMovie) => savedMovie.movieId !== movie.movieId
+            (savedMovie) => savedMovie.movieId !==removedMovie.movieId
           );
           setSavedMovies(newSavedMovies);
           localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
@@ -101,7 +101,6 @@ function App() {
           const newSavedMovies = savedMovies.filter(
             (savedMovie) => savedMovie.movieId !== movie.movieId
           );
-          console.log(newSavedMovies);
           setSavedMovies(newSavedMovies);
           localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
           setIsLiked(false);

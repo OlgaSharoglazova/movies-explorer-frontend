@@ -1,5 +1,5 @@
 .header {
-  width: 100%;
+  max-width: 1280px;
   background-color: #fff;
   height: 74px;
 }
@@ -13,7 +13,7 @@
   padding: 18px 70px;
   align-items: center;
   justify-content: space-between;
-  max-width: 1150px;
+  max-width: 1140px;
 }
 
 .header__logo {

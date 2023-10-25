@@ -11,14 +11,10 @@ function Movies({
   onBurgerClick,
   getAllMovies,
   onSearch,
-  //onChange,
-  //searchValue,
-  //isChecked,
-  //onChangeCheckbox,
   savedMovies,
   handleSaveMovie,
   handleMovieDelete,
-  isLoggedIn
+  isLoggedIn,
 }) {
   const [filteredMovies, setFilteredMovies] = React.useState(
     JSON.parse(localStorage.getItem("filteredmovies")) || []
@@ -51,8 +47,7 @@ function Movies({
       );
       localStorage.setItem("filteredmovies", JSON.stringify(filteredMovies));
       setFilteredMovies(filteredMovies);
-    }
-    else {
+    } else {
       const filteredMovies = allMovies.filter(
         (movie) =>
           movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -63,9 +58,9 @@ function Movies({
     }
   }, [searchValue, isChecked, savedMovies, allMovies]);
 
-   // изменение данных в форме поиска
+  // изменение данных в форме поиска
 
-   function handleChangeSearchForm(evt) {
+  function handleChangeSearchForm(evt) {
     const valueSearch = evt.target.value;
     setSearchValue(valueSearch);
     localStorage.setItem("searchform", JSON.stringify(valueSearch));

@@ -1,8 +1,10 @@
 .nav-tab {
-  width: 100%;
+  max-width: 1140px;
   background-color: #F5F5F5;
   display: flex;
   justify-content: center;
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
 .nav-tab__anchors {

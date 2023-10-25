@@ -10,10 +10,6 @@ function SavedMovies({
   savedMovies,
   onBurgerClick,
   onSearch,
-  //onChange,
- // searchValue,
-  //isChecked,
-  //onChangeCheckbox,
   handleMovieDelete,
 }) {
   const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);

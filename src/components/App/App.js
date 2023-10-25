@@ -19,6 +19,8 @@ import Preloader from "../Preloader/Preloader";
 function App() {
   const [isMenuOpened, setIsMenuOpened] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isFail, setIsFail] = React.useState(false);
+  const [isChange, setIsChange] = React.useState(false);
   const [isLoggedIn, setisLoggedIn] = React.useState(false);
   const [userData, setUserData] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
@@ -84,7 +86,7 @@ function App() {
         .deleteMovie(removedMovie._id)
         .then(() => {
           const newSavedMovies = savedMovies.filter(
-            (savedMovie) => savedMovie.movieId !==removedMovie.movieId
+            (savedMovie) => savedMovie.movieId !== removedMovie.movieId
           );
           setSavedMovies(newSavedMovies);
           localStorage.setItem("savedmovies", JSON.stringify(newSavedMovies));
@@ -241,8 +243,12 @@ function App() {
       .editProfile(dataUser)
       .then((newData) => {
         setCurrentUser(newData);
+        setIsChange(true);
       })
-      .catch((err) => console.log(`Ошибка: ${err}`));
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+        setIsFail(true);
+      });
   }
 
   return (
@@ -317,6 +323,8 @@ function App() {
                     onBurgerClick={handleBurgerClick}
                     onLogout={handleLogout}
                     isSuccess={isSuccess}
+                    isFail={isFail}
+                    isChange={isChange}
                     onUpdateUser={handleUpdateUser}
                     isLoggedIn={isLoggedIn}
                   />

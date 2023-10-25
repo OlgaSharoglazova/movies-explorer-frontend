@@ -4,11 +4,9 @@ import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/UseValidation";
 
-function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
+function Profile({ onUpdateUser, onLogout, onBurgerClick, isSuccess, isFail, isChange }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [isEditing, setIsEditing] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [isChanged, setIsChanged] = React.useState(false);
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   React.useEffect(() => {
@@ -22,8 +20,6 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     onUpdateUser(values);
-    setIsSuccess(true);
-    setIsChanged(true);
   }
 
   return (
@@ -79,27 +75,20 @@ function Profile({ onUpdateUser, onLogout, onBurgerClick }) {
             <div className="profile__actions">
               {isEditing ? (
                 <div className="profile__submit">
-                  {isSuccess ? (
+                  {isChange &&
                     <span
-                      className={
-                        isChanged
-                          ? "profile__submit-result"
-                          : "profile__submit-result_hidden"
-                      }
+                      className=
+                         "profile__submit-result"
                     >
                       Данные успешно изменены.
                     </span>
-                  ) : (
-                    <span
-                      className={
-                        isChanged
-                          ? "profile__submit-result"
-                          : "profile__submit-result_hidden"
                       }
+                      {isFail && <span
+                      className=
+                           "profile__submit-result"
                     >
                       При обновлении профиля произошла ошибка.
-                    </span>
-                  )}
+                    </span>}
                   <button
                     type="submit"
                     className="profile__submit-button button"

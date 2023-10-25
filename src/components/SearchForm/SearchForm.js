@@ -8,15 +8,10 @@ function SearchForm({
   searchValue,
   isChecked,
   onChangeCheckbox,
-  handleFilter,
 }) {
-  const location = useLocation();
 
   function onSearch(evt) {
     evt.preventDefault();
-    // if (location.pathname === "/movies") {
-    //   handleFilter();
-    // }
   }
 
   return (

@@ -10,13 +10,15 @@ function SavedMovies({
   savedMovies,
   onBurgerClick,
   onSearch,
-  onChange,
-  searchValue,
-  isChecked,
-  onChangeCheckbox,
+  //onChange,
+ // searchValue,
+  //isChecked,
+  //onChangeCheckbox,
   handleMovieDelete,
 }) {
   const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState("");
+  const [isChecked, setIsChecked] = React.useState(false);
 
   React.useEffect(() => {
     if (searchValue === "" && isChecked === false) {
@@ -43,6 +45,21 @@ function SavedMovies({
     }
   }, [searchValue, isChecked, savedMovies]);
 
+  // изменение данных в форме поиска
+
+  function handleChangeSearchForm(evt) {
+    const valueSearch = evt.target.value;
+    setSearchValue(valueSearch);
+  }
+
+  // переключение короткометражек
+
+  function handleChangeCheckbox(evt) {
+    evt.preventDefault();
+    const valueCheck = evt.target.checked;
+    setIsChecked(valueCheck);
+  }
+
   return (
     <>
       <Header onBurgerClick={onBurgerClick}></Header>
@@ -50,10 +67,10 @@ function SavedMovies({
         <section className="saved-movies__container">
           <SearchForm
             onSearch={onSearch}
-            onChange={onChange}
+            onChange={handleChangeSearchForm}
             searchValue={searchValue}
             isChecked={isChecked}
-            onChangeCheckbox={onChangeCheckbox}
+            onChangeCheckbox={handleChangeCheckbox}
           ></SearchForm>
           <MoviesCardList
             savedMovies={savedMovies}

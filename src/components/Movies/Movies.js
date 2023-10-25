@@ -11,10 +11,10 @@ function Movies({
   onBurgerClick,
   getAllMovies,
   onSearch,
-  onChange,
-  searchValue,
-  isChecked,
-  onChangeCheckbox,
+  //onChange,
+  //searchValue,
+  //isChecked,
+  //onChangeCheckbox,
   savedMovies,
   handleSaveMovie,
   handleMovieDelete,
@@ -22,6 +22,12 @@ function Movies({
 }) {
   const [filteredMovies, setFilteredMovies] = React.useState(
     JSON.parse(localStorage.getItem("filteredmovies")) || []
+  );
+  const [searchValue, setSearchValue] = React.useState(
+    JSON.parse(localStorage.getItem("searchform")) || ""
+  );
+  const [isChecked, setIsChecked] = React.useState(
+    JSON.parse(localStorage.getItem("checkbox")) || false
   );
 
   React.useEffect(() => {
@@ -57,6 +63,23 @@ function Movies({
     }
   }, [searchValue, isChecked, savedMovies, allMovies]);
 
+   // изменение данных в форме поиска
+
+   function handleChangeSearchForm(evt) {
+    const valueSearch = evt.target.value;
+    setSearchValue(valueSearch);
+    localStorage.setItem("searchform", JSON.stringify(valueSearch));
+  }
+
+  // переключение короткометражек
+
+  function handleChangeCheckbox(evt) {
+    evt.preventDefault();
+    const valueCheck = evt.target.checked;
+    setIsChecked(valueCheck);
+    localStorage.setItem("checkbox", JSON.stringify(valueCheck));
+  }
+
   return (
     <>
       <Header onBurgerClick={onBurgerClick}></Header>
@@ -64,10 +87,10 @@ function Movies({
         <section className="movies__container">
           <SearchForm
             onSearch={onSearch}
-            onChange={onChange}
+            onChange={handleChangeSearchForm}
             searchValue={searchValue}
             isChecked={isChecked}
-            onChangeCheckbox={onChangeCheckbox}
+            onChangeCheckbox={handleChangeCheckbox}
           ></SearchForm>
           <MoviesCardList
             movies={filteredMovies}

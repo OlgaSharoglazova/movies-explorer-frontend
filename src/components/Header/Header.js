@@ -15,20 +15,20 @@ function Header({ onBurgerClick, isLoggedIn }) {
           </Link>
           {isLoggedIn ? (
             <>
-            <div className="header__nav">
-              <div className="header__movie-links">
-                <Link className="link header__main-link" to={"/movies"}>
-                  Фильмы
-                </Link>
-                <Link className="link header__main-link" to={"/saved-movies"}>
-                  Сохранённые фильмы
+              <div className="header__nav">
+                <div className="header__movie-links">
+                  <Link className="link header__main-link" to={"/movies"}>
+                    Фильмы
+                  </Link>
+                  <Link className="link header__main-link" to={"/saved-movies"}>
+                    Сохранённые фильмы
+                  </Link>
+                </div>
+                <Link className="link header__main-profile" to={"/profile"}>
+                  Аккаунт
                 </Link>
               </div>
-              <Link className="link header__main-profile" to={"/profile"}>
-                Аккаунт
-              </Link>
-            </div>
-            <BurgerMenu onBurgerClick={onBurgerClick}/>
+              <BurgerMenu onBurgerClick={onBurgerClick} />
             </>
           ) : (
             <div className="header__menu">
@@ -52,18 +52,24 @@ function Header({ onBurgerClick, isLoggedIn }) {
           </Link>
           <div className="header__nav">
             <div className="header__movie-links">
-              <Link className={
-          location.pathname === "/movies" 
-            ? "link header__link-active"
-            : "link header__link"
-        } to={"/movies"}>
+              <Link
+                className={
+                  location.pathname === "/movies"
+                    ? "link header__link-active"
+                    : "link header__link"
+                }
+                to={"/movies"}
+              >
                 Фильмы
               </Link>
-              <Link className={
-          location.pathname === "/saved-movies" 
-            ? "link header__link-active"
-            : "link header__link"
-        } to={"/saved-movies"}>
+              <Link
+                className={
+                  location.pathname === "/saved-movies"
+                    ? "link header__link-active"
+                    : "link header__link"
+                }
+                to={"/saved-movies"}
+              >
                 Сохранённые фильмы
               </Link>
             </div>
@@ -71,7 +77,7 @@ function Header({ onBurgerClick, isLoggedIn }) {
               Аккаунт
             </Link>
           </div>
-          <BurgerMenu onBurgerClick={onBurgerClick}/>
+          <BurgerMenu onBurgerClick={onBurgerClick} />
         </div>
       </header>
     );

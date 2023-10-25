@@ -32,32 +32,9 @@ function App() {
   const [allMovies, setAllMovies] = React.useState(
     JSON.parse(localStorage.getItem("allmovies")) || []
   );
-  const [searchValue, setSearchValue] = React.useState(
-    JSON.parse(localStorage.getItem("searchform")) || ""
-  );
-  const [isChecked, setIsChecked] = React.useState(
-    JSON.parse(localStorage.getItem("checkbox")) || false
-  );
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  // изменение данных в форме поиска
-
-  function handleChangeSearchForm(evt) {
-    const value = evt.target.value;
-    setSearchValue(value);
-    localStorage.setItem("searchform", JSON.stringify(value));
-  }
-
-  // переключение короткометражек
-
-  function handleChangeCheckbox(evt) {
-    evt.preventDefault();
-    const value = evt.target.checked;
-    setIsChecked(value);
-    localStorage.setItem("checkbox", JSON.stringify(value));
-  }
 
   // сохранение фильма
 
@@ -183,8 +160,6 @@ function App() {
     setisLoggedIn(false);
     setCurrentUser({});
     localStorage.clear();
-    setIsChecked(false);
-    setSearchValue("");
     navigate("/", { replace: true });
   }
 
@@ -280,11 +255,7 @@ function App() {
                     onBurgerClick={handleBurgerClick}
                     isLoggedIn={isLoggedIn}
                     getAllMovies={getAllMovies}
-                    onChange={handleChangeSearchForm}
-                    searchValue={searchValue}
                     allMovies={allMovies}
-                    onChangeCheckbox={handleChangeCheckbox}
-                    isChecked={isChecked}
                     savedMovies={savedMovies}
                     handleSaveMovie={handleSaveMovie}
                     handleMovieDelete={handleMovieDelete}
@@ -302,10 +273,6 @@ function App() {
                     element={SavedMovies}
                     onBurgerClick={handleBurgerClick}
                     isLoggedIn={isLoggedIn}
-                    onChange={handleChangeSearchForm}
-                    searchValue={searchValue}
-                    onChangeCheckbox={handleChangeCheckbox}
-                    isChecked={isChecked}
                     handleSaveMovie={handleSaveMovie}
                     handleMovieDelete={handleMovieDelete}
                     savedMovies={savedMovies}

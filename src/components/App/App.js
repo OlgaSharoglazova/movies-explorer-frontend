@@ -51,6 +51,7 @@ function App() {
   // переключение короткометражек
 
   function handleChangeCheckbox(evt) {
+    evt.preventDefault();
     const value = evt.target.checked;
     setIsChecked(value);
     localStorage.setItem("checkbox", JSON.stringify(value));
@@ -181,6 +182,8 @@ function App() {
     setisLoggedIn(false);
     setCurrentUser({});
     localStorage.clear();
+    setIsChecked(false);
+    setSearchValue("");
     navigate("/", { replace: true });
   }
 

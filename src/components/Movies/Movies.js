@@ -30,8 +30,8 @@ function Movies({
 
   // фильтрация
 
-  function handleFilter() {
-    if (isChecked && searchValue !== "") {
+  React.useEffect(() => {
+    if (isChecked) {
       const filteredMovies = allMovies.filter(
         (movie) =>
           (movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -41,7 +41,7 @@ function Movies({
       localStorage.setItem("filteredmovies", JSON.stringify(filteredMovies));
       setFilteredMovies(filteredMovies);
     }
-    if (searchValue !== "") {
+    else {
       const filteredMovies = allMovies.filter(
         (movie) =>
           movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -50,7 +50,7 @@ function Movies({
       localStorage.setItem("filteredmovies", JSON.stringify(filteredMovies));
       setFilteredMovies(filteredMovies);
     }
-  }
+  }, [searchValue, isChecked]);
 
   return (
     <>
@@ -63,7 +63,7 @@ function Movies({
             searchValue={searchValue}
             isChecked={isChecked}
             onChangeCheckbox={onChangeCheckbox}
-            handleFilter={handleFilter}
+           // handleFilter={handleFilter}
           ></SearchForm>
           <MoviesCardList
             movies={filteredMovies}

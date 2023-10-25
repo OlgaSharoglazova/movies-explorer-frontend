@@ -14,9 +14,9 @@ function SearchForm({
 
   function onSearch(evt) {
     evt.preventDefault();
-    if (location.pathname === "/movies") {
-      handleFilter();
-    }
+    // if (location.pathname === "/movies") {
+    //   handleFilter();
+    // }
   }
 
   return (

@@ -71,26 +71,31 @@ function MoviesCardList({
   return (
     <section className="movies-list">
       <ul className="movies-list__container">
-        {location.pathname === "/movies"
-          ? movies.slice(0, countMovies).map((movie) => (
+        {location.pathname === "/movies" && movies.length !== 0 ? (
+          movies
+            .slice(0, countMovies)
+            .map((movie) => (
               <MoviesCard
                 movie={movie}
                 key={movie.id || movie._id}
                 handleSaveMovie={handleSaveMovie}
                 savedMovies={savedMovies}
                 handleMovieDelete={handleMovieDelete}
-                //isLiked={isLiked}
               />
             ))
-          : filteredSavedMovies.map((movie) => (
-              <MoviesCard
-                movie={movie}
-                key={movie.id || movie._id}
-                savedMovies={savedMovies}
-                handleSaveMovie={handleSaveMovie}
-                handleMovieDelete={handleMovieDelete}
-              />
-            ))}
+        ) : location.pathname === "/movies" && (movies.length === 0 || !movies) ? (
+          <p className="movies-list__error">Ничего не найдено</p>
+        ) : (
+          filteredSavedMovies.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              key={movie.id || movie._id}
+              savedMovies={savedMovies}
+              handleSaveMovie={handleSaveMovie}
+              handleMovieDelete={handleMovieDelete}
+            />
+          ))
+        )}
       </ul>
       <button
         className={
@@ -107,3 +112,12 @@ function MoviesCardList({
 }
 
 export default MoviesCardList;
+
+
+// : location.pathname === "/movies" &&
+//           (movies === null || movies === undefined) ? (
+//           <p className="movies-list__error">
+//             Во время запроса произошла ошибка. Возможно, проблема с соединением
+//             или сервер недоступен.
+//           </p>
+//         )

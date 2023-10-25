@@ -52,10 +52,18 @@ function Header({ onBurgerClick, isLoggedIn }) {
           </Link>
           <div className="header__nav">
             <div className="header__movie-links">
-              <Link className="link header__link-movies" to={"/movies"}>
+              <Link className={
+          location.pathname === "/movies" 
+            ? "link header__link-active"
+            : "link header__link"
+        } to={"/movies"}>
                 Фильмы
               </Link>
-              <Link className="link header__link-saved" to={"/saved-movies"}>
+              <Link className={
+          location.pathname === "/saved-movies" 
+            ? "link header__link-active"
+            : "link header__link"
+        } to={"/saved-movies"}>
                 Сохранённые фильмы
               </Link>
             </div>

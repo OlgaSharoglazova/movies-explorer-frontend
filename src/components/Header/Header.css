@@ -83,7 +83,7 @@
   color: #fff;
 }
 
-.header__link-movies {
+.header__link-active {
   font-family: "Inter", Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -92,7 +92,7 @@
   color: #000;
 }
 
-.header__link-saved {
+.header__link {
   font-family: "Inter", Arial, sans-serif;
   font-size: 13px;
   line-height: 18px;

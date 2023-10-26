@@ -3,13 +3,18 @@ import { Link, useLocation } from "react-router-dom";
 
 function Navigation({ isOpen, onClose }) {
   const location = useLocation();
-  
+
   return (
-    <div className={ isOpen ? "navigation navigation-opened" : "navigation" }>
+    <div className={isOpen ? "navigation navigation-opened" : "navigation"}>
       <div className="navigation__container">
-        <button onClick={onClose} className="navigation__close" aria-label="Закрыть"></button>
+        <button
+          onClick={onClose}
+          className="navigation__close"
+          aria-label="Закрыть"
+        ></button>
         <div className="navigation__menu">
           <Link
+            onClick={onClose}
             to="/"
             className={
               location.pathname === "/"
@@ -20,6 +25,7 @@ function Navigation({ isOpen, onClose }) {
             Главная
           </Link>
           <Link
+            onClick={onClose}
             to="/movies"
             className={
               location.pathname === "/movies"
@@ -30,6 +36,7 @@ function Navigation({ isOpen, onClose }) {
             Фильмы
           </Link>
           <Link
+            onClick={onClose}
             to="/saved-movies"
             className={
               location.pathname === "/saved-movies"
@@ -40,7 +47,13 @@ function Navigation({ isOpen, onClose }) {
             Сохранённые фильмы
           </Link>
         </div>
-        <Link to="/profile" className="navigation__link-profile">Аккаунт</Link>
+        <Link
+          onClick={onClose}
+          to="/profile"
+          className="navigation__link-profile"
+        >
+          Аккаунт
+        </Link>
       </div>
     </div>
   );

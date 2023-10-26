@@ -30,7 +30,9 @@
   margin-bottom: 0;
 }
 
-.not-found__link {
+.not-found__button {
+  border: none;
+  background-color: transparent;
   font-family: "Inter", Arial, sans-serif;
   font-size: 14px;
   line-height: 17px;
@@ -39,6 +41,11 @@
   color: #ff6838;
   margin-top: 184px;
   margin-bottom: 60px;
+  cursor: pointer;
+}
+
+.not-found__button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 1000px) {

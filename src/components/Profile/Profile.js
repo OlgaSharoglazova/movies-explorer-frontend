@@ -1,54 +1,118 @@
+import React from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useFormWithValidation } from "../../utils/UseValidation";
 
-function Profile() {
+function Profile({ onUpdateUser, onLogout, onBurgerClick, isSuccess, isFail, isChange }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const [isEditing, setIsEditing] = React.useState(false);
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  React.useEffect(() => {
+    resetForm({ email: currentUser.email, name: currentUser.name }, {}, false);
+  }, [currentUser, resetForm]);
+
+  function handleStartEditing() {
+    setIsEditing(true);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onUpdateUser(values);
+  }
+
   return (
     <>
-      <Header></Header>
+      <Header onBurgerClick={onBurgerClick}></Header>
       <main className="profile">
         <section className="profile__container">
-          <h1 className="profile__title">Привет, Виталий!</h1>
-          <form className="profile__form">
-            <div className="profile__input-container">
-              <label className="profile__label">Имя</label>
-              <input
-                className="profile__input"
-                id="name"
-                type="text"
-                name="name"
-                placeholder="Имя"
-                required
-                minLength="2"
-                maxLength="30"
-              />
-              <span className="profile__error"></span>
-            </div>
-            <div className="profile__line"></div>
-            <div className="profile__input-container">
-              <label className="profile__label">E-mail</label>
-              <input
-                className="profile__input"
-                id="email"
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                required
-              />
-              <span className="profile__error"></span>
-            </div>
-            <div className="profile__actions">
-              <div className="profile__submit">
-                <span className="profile__submit-error">
-                  При обновлении профиля произошла ошибка.
-                </span>
-                <button type="submit" className="profile__submit-button button">
-                  Сохранить
-                </button>
+          <h1 className="profile__title">{`Привет, ${
+            currentUser.name || ""
+          }!`}</h1>
+          <form
+            name="profile-form"
+            className="profile__form"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <fieldset className="profile__fieldset">
+              <div className="profile__input-container">
+                <label className="profile__label">Имя</label>
+                <input
+                  className="profile__input"
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="Имя"
+                  required
+                  minLength="2"
+                  maxLength="30"
+                  value={values.name || ""}
+                  onChange={handleChange}
+                  disabled={isEditing ? false : true}
+                />
               </div>
-              <button className="profile__edit button">Редактировать</button>
-              <button className="profile__sign-out button">
-                Выйти из аккаунта
-              </button>
+              <span className="profile__error">{errors.name || ""}</span>
+              <div className="profile__line"></div>
+              <div className="profile__input-container">
+                <label className="profile__label">E-mail</label>
+                <input
+                  className="profile__input"
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                  required
+                  value={values.email || ""}
+                  onChange={handleChange}
+                  pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+                  disabled={isEditing ? false : true}
+                />
+              </div>
+              <span className="profile__error">{errors.email || ""}</span>
+            </fieldset>
+            <div className="profile__actions">
+              {isEditing ? (
+                <div className="profile__submit">
+                  {isChange &&
+                    <span
+                      className=
+                         "profile__submit-result"
+                    >
+                      Данные успешно изменены.
+                    </span>
+                      }
+                      {isFail && <span
+                      className=
+                           "profile__submit-result"
+                    >
+                      При обновлении профиля произошла ошибка.
+                    </span>}
+                  <button
+                    type="submit"
+                    className="profile__submit-button button"
+                    disabled={!isValid || (values.name === currentUser.name & values.email === currentUser.email)}
+                  >
+                    Сохранить
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <button
+                    className="profile__edit button"
+                    onClick={handleStartEditing}
+                  >
+                    Редактировать
+                  </button>
+                  <button
+                    className="profile__sign-out button"
+                    onClick={onLogout}
+                  >
+                    Выйти из аккаунта
+                  </button>
+                </>
+              )}
             </div>
           </form>
         </section>

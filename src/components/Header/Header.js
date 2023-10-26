@@ -3,9 +3,8 @@ import logo from "../../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
-function Header({ onBurgerClick }) {
+function Header({ onBurgerClick, isLoggedIn }) {
   const location = useLocation();
-  const isAuthorized = true;
 
   if (location.pathname === "/") {
     return (
@@ -14,22 +13,22 @@ function Header({ onBurgerClick }) {
           <Link to={"/"} className="header__logo link">
             <img className="header__logo-icon" alt="Логотип" src={logo} />
           </Link>
-          {isAuthorized ? (
+          {isLoggedIn ? (
             <>
-            <div className="header__nav">
-              <div className="header__movie-links">
-                <Link className="link header__main-link" to={"/movies"}>
-                  Фильмы
-                </Link>
-                <Link className="link header__main-link" to={"/saved-movies"}>
-                  Сохранённые фильмы
+              <div className="header__nav">
+                <div className="header__movie-links">
+                  <Link className="link header__main-link" to={"/movies"}>
+                    Фильмы
+                  </Link>
+                  <Link className="link header__main-link" to={"/saved-movies"}>
+                    Сохранённые фильмы
+                  </Link>
+                </div>
+                <Link className="link header__main-profile" to={"/profile"}>
+                  Аккаунт
                 </Link>
               </div>
-              <Link className="link header__main-profile" to={"/profile"}>
-                Аккаунт
-              </Link>
-            </div>
-            <BurgerMenu onBurgerClick={onBurgerClick}/>
+              <BurgerMenu onBurgerClick={onBurgerClick} />
             </>
           ) : (
             <div className="header__menu">
@@ -53,10 +52,24 @@ function Header({ onBurgerClick }) {
           </Link>
           <div className="header__nav">
             <div className="header__movie-links">
-              <Link className="link header__link-movies" to={"/movies"}>
+              <Link
+                className={
+                  location.pathname === "/movies"
+                    ? "link header__link-active"
+                    : "link header__link"
+                }
+                to={"/movies"}
+              >
                 Фильмы
               </Link>
-              <Link className="link header__link-saved" to={"/saved-movies"}>
+              <Link
+                className={
+                  location.pathname === "/saved-movies"
+                    ? "link header__link-active"
+                    : "link header__link"
+                }
+                to={"/saved-movies"}
+              >
                 Сохранённые фильмы
               </Link>
             </div>
@@ -64,7 +77,7 @@ function Header({ onBurgerClick }) {
               Аккаунт
             </Link>
           </div>
-          <BurgerMenu />
+          <BurgerMenu onBurgerClick={onBurgerClick} />
         </div>
       </header>
     );

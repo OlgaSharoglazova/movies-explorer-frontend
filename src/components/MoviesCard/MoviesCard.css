@@ -13,6 +13,11 @@
   flex-direction: column;
 }
 
+.movies-card__link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .movies-card__image {
   height: 151px;
   width: 100%;
@@ -60,7 +65,7 @@
   margin-right: 12px;
 }
 
-.movies-card__save:focus {
+.movies-card__active {
   box-sizing: border-box;
   width: 16px;
   height: 16px;
